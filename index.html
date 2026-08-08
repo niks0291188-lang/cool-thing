@@ -39,9 +39,12 @@
             background-position: top left;
             background-attachment: fixed;
             overflow-x: hidden;
-            font-family: sans-serif;
+            font-family: sans-serif; /* Добавлен базовый шрифт для аккуратности */
         }
 
+        /* =========================================
+           2. ТИПОГРАФИКА И ОБЩИЕ ЭЛЕМЕНТЫ
+           ========================================= */
         h1.main-title {
             color: var(--color-text);
             text-align: center;
@@ -76,6 +79,9 @@
 
         .btn:hover { background-color: var(--color-btn-hover); }
 
+        /* =========================================
+           3. СЕТКА И КАРКАС САЙТА (LAYOUT)
+           ========================================= */
         .three-columns-section {
             padding: 40px 20px;
         }
@@ -93,18 +99,24 @@
             padding: 25px;
         }
 
+        /* =========================================
+           4. СЛОИ И ИНТЕРАКТИВ (КОЛОНКА С ДИСКАМИ)
+           ========================================= */
+        
+        /* Центральная колонка-контейнер */
         #links-column {
             background: transparent;
             padding: 0;
             position: relative;
-            z-index: 10;
+            z-index: 10; /* Держим поверх соседних колонок */
         }
 
+        /* Блок с самими ссылками (Верхний слой) */
         .column-content {
             background: var(--color-bg-column);
             padding: 25px;
             position: relative;
-            z-index: 5;
+            z-index: 5; /* Поверх дисков */
             height: 100%;
             box-sizing: border-box;
         }
@@ -113,32 +125,56 @@
             list-style: none;
             padding: 0;
             margin: 0 0 20px 0;
+            position: relative;
+            min-height: 760px;
         }
 
-        .link-list li { margin-bottom: 10px; }
+        .link-list li {
+            list-style: none;
+            position: absolute;
+            width: var(--btn-width, 140px);
+            height: var(--btn-height, 140px);
+            left: var(--btn-left, 0px);
+            top: var(--btn-top, 0px);
+        }
 
         .link-list a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 8px;
             text-decoration: none;
-            display: inline-block;
-            position: relative;
-            z-index: 10;
         }
 
-        .link-list a:hover { text-decoration: underline; }
+        .link-list img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
 
+        .link-list a:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Диски (Средний слой) */
         .disc-wrapper {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: var(--disc-diameter);
-            height: var(--disc-diameter);
-            transform: translate(-50%, -50%) rotate(0deg);
+            width: var(--disc-diameter); 
+            height: var(--disc-diameter); 
+            transform: translate(-50%, -50%) rotate(0deg); 
             transform-origin: center center;
-            z-index: 2;
-            pointer-events: none;
+            z-index: 2; /* Под текстом (5), но над 3-й колонкой (1) */
+            pointer-events: none; /* Чтобы диски не перекрывали клики */
             transition: transform 1.2s cubic-bezier(0.1, 1, 0.2, 1);
         }
 
+        /* Анимация выезда диска */
         .disc-wrapper.active {
             transform: translate(10%, -50%) rotate(360deg);
         }
@@ -146,7 +182,7 @@
         .disc-inner {
             width: 100%;
             height: 100%;
-            border-radius: 50%;
+            border-radius: 50%; 
             object-fit: cover;
             animation: slow-spin 20s linear infinite;
         }
@@ -156,27 +192,31 @@
             to { transform: rotate(360deg); }
         }
 
+        /* Правая колонка (Нижний слой) */
         #widget-column {
             position: relative;
-            z-index: 1;
+            z-index: 1; /* Самый нижний слой в сетке */
         }
 
         .widget-box {
             background: #eef2f7;
-            color: #000;
+            color: #000; /* Переопределяем цвет текста для светлого виджета */
             padding: 15px;
             border-radius: 6px;
             border-left: 4px solid var(--color-btn);
         }
 
+        /* =========================================
+           5. МОБИЛЬНАЯ ЗАГЛУШКА
+           ========================================= */
         #mobile-warning {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background-color: #293133;
+            background-color: #293133; 
             color: var(--color-text);
-            z-index: 9999;
+            z-index: 9999; 
             text-align: center;
             padding: 40px 20px;
             box-sizing: border-box;
@@ -193,22 +233,29 @@
         }
     </style>
 </head>
-<body>
+<body> 
+ 
+    <!-- Заглушка для мобильных устройств -->
     <div id="mobile-warning">
-        <h1>⚠️ чел ты КАКОГО ЧЕРТА с телефона заходишь? ⚠️</h1>
+        <h1>⚠️ чел ты КАКОГО ЧЕРТА с телефона заходишь? ⚠️ </h1>
         <p>слушай я понимаю ты там спешишь у тебя дел куча ну блин блинский я старался над стилем вайбкодил под ютубчик, а ты думаешь что я отдельно версию под телефоны стал бы делать? ты давай зайди там в настройки или че там у тебя, нажми <b>«Версия для ПК»</b>, ну еперный мангал ладно давай там</p>
     </div>
-
-    <h1 class="main-title">АУДИО ВЕБ-САЙТ [СТАРЫЙ]</h1>
-
+ 
+    <!-- Основной заголовок -->
+    <h1 class="main-title"> АУДИО ВЕБ-САЙТ [СТАРЫЙ] </h1>
+ 
+    <!-- Главный контейнер с колонками -->
     <main class="three-columns-section">
         <div class="container">
+            
+            <!-- Левая колонка -->
             <section class="column">
                 <h3>О нас</h3>
-                <p>здравсте!</p>
-                <p>это реально сайт</p>
-                <p>сайт посвящен конкретному <a href="https://www.youtube.com/@le_nasral" target="_blank">видео-ресурсу</a>.</p>
-                <img src="noviy.jpg" alt="буээ" style="max-width: 100%; height: auto; border-radius: 4px;">
+                <p> здрасте! </p>
+                <p> это реально сайт </p>
+                <p> сайт посвящен конкретному <a href="https://www.youtube.com/@le_nasral" target="_blank">видео-ресурсу</a>.</p>
+                <!-- Добавил max-width, чтобы картинка не вылазила за края на малых экранах -->
+                <img src="/noviy.jpg" alt="буээ" style="max-width: 100%; height: auto; border-radius: 4px;">
                 <h2>То что важно учесть</h2>
                 <ul>
                     <li>данный ресурс является ОФИЦИАЛЬНЫМ веб-сайтом компании "дисбаланс"</li>
@@ -218,18 +265,30 @@
                 <a href="#" class="btn">Подробнее</a>
             </section>
 
+            <!-- Центральная колонка (Навигация + Диски) -->
             <section class="column" id="links-column">
+                
                 <div class="column-content">
                     <h3>Полезные ссылки</h3>
                     <nav>
                         <ul class="link-list">
-                            <li><a href="#" class="disc-trigger" data-target="disc-1">Главная страница</a></li>
-                            <li><a href="#" class="disc-trigger" data-target="disc-2">Наши услуги</a></li>
-                            <li><a href="#" class="disc-trigger" data-target="disc-3">Портфолио</a></li>
-                            <li><a href="#" class="disc-trigger" data-target="disc-4">Контакты</a></li>
+                            <li style="--btn-left: 0px; --btn-top: 0px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-1"><img src="диски_0003s_0009_ВИДЕОАРХИВ.png" alt="диски 0000"></a></li>
+                            <li style="--btn-left: 180px; --btn-top: 0px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-2"><img src="диски_0003s_0008_ПЛЕЙЛИСТ.png" alt="диски 0001"></a></li>
+                            <li style="--btn-left: 360px; --btn-top: 0px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-3"><img src="диски_0003s_0005_ИГРЫ---99---В---1.png" alt="диски 0002"></a></li>
+                            <li style="--btn-left: 0px; --btn-top: 180px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-4"><img src="диски_0003s_0004_ФОТОТЕКА.png" alt="диски 0003"></a></li>
+                            <li style="--btn-left: 180px; --btn-top: 180px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-5"><img src="диски_0003s_0007_ДОСЫЕ.png" alt="диски 0004"></a></li>
+                            <li style="--btn-left: 360px; --btn-top: 180px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-6"><img src="диски_0003s_0006_БЛОКНОТ.png" alt="диски 0005"></a></li>
+                            <li style="--btn-left: 0px; --btn-top: 360px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-7"><img src="диски_0003s_0003_БИБЛИОТЕКА.png" alt="диски 0006"></a></li>
+                            <li style="--btn-left: 180px; --btn-top: 360px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-8"><img src="диски_0003s_0011_ПУСТО.png" alt="диски 0007"></a></li>
+                            <li style="--btn-left: 360px; --btn-top: 360px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-9"><img src="диски_0003s_0010_ПУСТО1.png" alt="диски 0008"></a></li>
+                            <li style="--btn-left: 0px; --btn-top: 540px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-10"><img src="диски_0003s_0002_ПУСТО2.png" alt="диски 0009"></a></li>
+                            <li style="--btn-left: 180px; --btn-top: 540px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-11"><img src="диски_0003s_0001_ПУСТО3.png" alt="диски 0010"></a></li>
+                            <li style="--btn-left: 360px; --btn-top: 540px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-12"><img src="диски_0003s_0000_ПУСТО4.png" alt="диски 0011"></a></li>
                         </ul>
                     </nav>
                 </div>
+                
+                <!-- Скрытые диски -->
                 <div class="disc-wrapper" id="disc-1">
                     <img src="TVS2.jpg" class="disc-inner" alt="Диск 1">
                 </div>
@@ -242,30 +301,63 @@
                 <div class="disc-wrapper" id="disc-4">
                     <img src="TVS2.jpg" class="disc-inner" alt="Диск 4">
                 </div>
+                <div class="disc-wrapper" id="disc-5">
+                    <img src="TVS2.jpg" class="disc-inner" alt="Диск 5">
+                </div>
+                <div class="disc-wrapper" id="disc-6">
+                    <img src="TVS2.jpg" class="disc-inner" alt="Диск 6">
+                </div>
+                <div class="disc-wrapper" id="disc-7">
+                    <img src="TVS2.jpg" class="disc-inner" alt="Диск 7">
+                </div>
+                <div class="disc-wrapper" id="disc-8">
+                    <img src="TVS2.jpg" class="disc-inner" alt="Диск 8">
+                </div>
+                <div class="disc-wrapper" id="disc-9">
+                    <img src="TVS2.jpg" class="disc-inner" alt="Диск 9">
+                </div>
+                <div class="disc-wrapper" id="disc-10">
+                    <img src="TVS2.jpg" class="disc-inner" alt="Диск 10">
+                </div>
+                <div class="disc-wrapper" id="disc-11">
+                    <img src="TVS2.jpg" class="disc-inner" alt="Диск 11">
+                </div>
+                <div class="disc-wrapper" id="disc-12">
+                    <img src="TVS2.jpg" class="disc-inner" alt="Диск 12">
+                </div>
             </section>
 
+            <!-- Правая колонка (Виджеты) -->
             <aside class="column" id="widget-column">
                 <h3>Виджет / Новости</h3>
                 <div class="widget-box">
                     <p style="margin:0;">Здесь может располагаться мини-виджет, форма подписки или свежая новость.</p>
                 </div>
             </aside>
+
         </div>
     </main>
 
+    <!-- Скрипты -->
     <script>
+        // Ждем, пока весь HTML загрузится
         document.addEventListener('DOMContentLoaded', () => {
+            // Находим все ссылки, которые должны вызывать диски
             const triggers = document.querySelectorAll('.disc-trigger');
+            
             triggers.forEach(trigger => {
+                // Когда мышка наводится на ссылку
                 trigger.addEventListener('mouseenter', function() {
-                    const targetId = this.getAttribute('data-target');
-                    const disc = document.getElementById(targetId);
-                    if (disc) disc.classList.add('active');
+                    const targetId = this.getAttribute('data-target'); // получаем id диска (например, disc-1)
+                    const disc = document.getElementById(targetId);    // находим этот диск в HTML
+                    if(disc) disc.classList.add('active');             // добавляем ему класс active (он выезжает)
                 });
+                
+                // Когда мышка уходит со ссылки
                 trigger.addEventListener('mouseleave', function() {
                     const targetId = this.getAttribute('data-target');
                     const disc = document.getElementById(targetId);
-                    if (disc) disc.classList.remove('active');
+                    if(disc) disc.classList.remove('active');          // убираем класс active (он заезжает обратно)
                 });
             });
         });
