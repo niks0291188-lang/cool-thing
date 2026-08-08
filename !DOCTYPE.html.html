@@ -25,10 +25,10 @@
             /* Сложный многослойный фон */
             background-image: 
                 linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%),
-                url('/TVS1.jpg'),
+                url('TVS1.jpg'),
                 linear-gradient(to bottom, #000000 0%, #000000 100%),
                 linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%),
-                url('/TVS2.jpg');
+                url('TVS2.jpg');
             background-repeat: no-repeat;
             background-size: 
                 100% 100vh, 
@@ -125,18 +125,40 @@
             list-style: none;
             padding: 0;
             margin: 0 0 20px 0;
+            position: relative;
+            min-height: 760px;
         }
 
-        .link-list li { margin-bottom: 10px; }
+        .link-list li {
+            list-style: none;
+            position: absolute;
+            width: var(--btn-width, 140px);
+            height: var(--btn-height, 140px);
+            left: var(--btn-left, 0px);
+            top: var(--btn-top, 0px);
+        }
 
         .link-list a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 8px;
             text-decoration: none;
-            display: inline-block; 
-            position: relative;
-            z-index: 10;
         }
 
-        .link-list a:hover { text-decoration: underline; }
+        .link-list img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .link-list a:hover img {
+            transform: scale(1.03);
+        }
 
         /* Диски (Средний слой) */
         .disc-wrapper {
@@ -250,26 +272,58 @@
                     <h3>Полезные ссылки</h3>
                     <nav>
                         <ul class="link-list">
-                            <li><a href="#" class="disc-trigger" data-target="disc-1">Главная страница</a></li>
-                            <li><a href="#" class="disc-trigger" data-target="disc-2">Наши услуги</a></li>
-                            <li><a href="#" class="disc-trigger" data-target="disc-3">Портфолио</a></li>
-                            <li><a href="#" class="disc-trigger" data-target="disc-4">Контакты</a></li>
+                            <li style="--btn-left: 0px; --btn-top: 0px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-1"><img src="диски_0003s_0009_ВИДЕОАРХИВ.png" alt="диски 0000"></a></li>
+                            <li style="--btn-left: 180px; --btn-top: 0px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-2"><img src="диски_0003s_0008_ПЛЕЙЛИСТ.png" alt="диски 0001"></a></li>
+                            <li style="--btn-left: 360px; --btn-top: 0px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-3"><img src="диски_0003s_0005_ИГРЫ---99---В---1.png" alt="диски 0002"></a></li>
+                            <li style="--btn-left: 0px; --btn-top: 180px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-4"><img src="диски_0003s_0004_ФОТОТЕКА.png" alt="диски 0003"></a></li>
+                            <li style="--btn-left: 180px; --btn-top: 180px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-5"><img src="диски_0003s_0007_ДОСЫЕ.png" alt="диски 0004"></a></li>
+                            <li style="--btn-left: 360px; --btn-top: 180px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-6"><img src="диски_0003s_0006_БЛОКНОТ.png" alt="диски 0005"></a></li>
+                            <li style="--btn-left: 0px; --btn-top: 360px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-7"><img src="диски_0003s_0003_БИБЛИОТЕКА.png" alt="диски 0006"></a></li>
+                            <li style="--btn-left: 180px; --btn-top: 360px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-8"><img src="диски_0003s_0011_ПУСТО.png" alt="диски 0007"></a></li>
+                            <li style="--btn-left: 360px; --btn-top: 360px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-9"><img src="диски_0003s_0010_ПУСТО1.png" alt="диски 0008"></a></li>
+                            <li style="--btn-left: 0px; --btn-top: 540px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-10"><img src="диски_0003s_0002_ПУСТО2.png" alt="диски 0009"></a></li>
+                            <li style="--btn-left: 180px; --btn-top: 540px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-11"><img src="диски_0003s_0001_ПУСТО3.png" alt="диски 0010"></a></li>
+                            <li style="--btn-left: 360px; --btn-top: 540px; --btn-width: 160px; --btn-height: 160px;"><a href="#" class="disc-trigger" data-target="disc-12"><img src="диски_0003s_0000_ПУСТО4.png" alt="диски 0011"></a></li>
                         </ul>
                     </nav>
                 </div>
                 
                 <!-- Скрытые диски -->
                 <div class="disc-wrapper" id="disc-1">
-                    <img src="/TVS2.jpg" class="disc-inner" alt="Диск 1">
+                    <img src="TVS2.jpg" class="disc-inner" alt="Диск 1">
                 </div>
                 <div class="disc-wrapper" id="disc-2">
-                    <img src="/TVS2.jpg" class="disc-inner" alt="Диск 2">
+                    <img src="TVS2.jpg" class="disc-inner" alt="Диск 2">
                 </div>
                 <div class="disc-wrapper" id="disc-3">
-                    <img src="/TVS2.jpg" class="disc-inner" alt="Диск 3">
+                    <img src="TVS2.jpg" class="disc-inner" alt="Диск 3">
                 </div>
                 <div class="disc-wrapper" id="disc-4">
-                    <img src="/TVS2.jpg" class="disc-inner" alt="Диск 4">
+                    <img src="TVS2.jpg" class="disc-inner" alt="Диск 4">
+                </div>
+                <div class="disc-wrapper" id="disc-5">
+                    <img src="TVS2.jpg" class="disc-inner" alt="Диск 5">
+                </div>
+                <div class="disc-wrapper" id="disc-6">
+                    <img src="TVS2.jpg" class="disc-inner" alt="Диск 6">
+                </div>
+                <div class="disc-wrapper" id="disc-7">
+                    <img src="TVS2.jpg" class="disc-inner" alt="Диск 7">
+                </div>
+                <div class="disc-wrapper" id="disc-8">
+                    <img src="TVS2.jpg" class="disc-inner" alt="Диск 8">
+                </div>
+                <div class="disc-wrapper" id="disc-9">
+                    <img src="TVS2.jpg" class="disc-inner" alt="Диск 9">
+                </div>
+                <div class="disc-wrapper" id="disc-10">
+                    <img src="TVS2.jpg" class="disc-inner" alt="Диск 10">
+                </div>
+                <div class="disc-wrapper" id="disc-11">
+                    <img src="TVS2.jpg" class="disc-inner" alt="Диск 11">
+                </div>
+                <div class="disc-wrapper" id="disc-12">
+                    <img src="TVS2.jpg" class="disc-inner" alt="Диск 12">
                 </div>
             </section>
 
