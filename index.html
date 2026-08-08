@@ -11,11 +11,18 @@
         :root {
             /* Размер выезжающих дисков */
             --disc-diameter: 650px;
-            /* Основные цвета для удобной замены */
+            /* Цвет кнопок */
             --color-text: #ffb841;
-            --color-bg-column: rgba(0, 0, 0, 0.8);
             --color-btn: #0066cc;
             --color-btn-hover: #004999;
+            /* Отдельный фон и прозрачность для колонок */
+            --color-left-column: rgba(0, 0, 0, 0.8);
+            --color-center-column: rgba(20, 20, 20, 0.75);
+            --color-right-column: rgba(0, 0, 0, 0.65);
+            /* Высоты колонок в пикселях */
+            --height-left-column: 760px;    /* Высота левой колонки */
+            --height-center-column: 760px;  /* Высота центральной колонки */
+            --height-right-column: 760px;   /* Высота правой колонки */
         }
 
         body {
@@ -95,8 +102,12 @@
         }
 
         .column {
-            background: var(--color-bg-column);
             padding: 25px;
+        }
+
+        .column:first-child {
+            background: var(--color-left-column);
+            height: var(--height-left-column);
         }
 
         /* =========================================
@@ -105,20 +116,25 @@
         
         /* Центральная колонка-контейнер */
         #links-column {
-            background: transparent;
+            background: var(--color-center-column);
             padding: 0;
             position: relative;
             z-index: 10; /* Держим поверх соседних колонок */
+            height: var(--height-center-column);
         }
 
         /* Блок с самими ссылками (Верхний слой) */
         .column-content {
-            background: var(--color-bg-column);
+            background: var(--color-center-column);
             padding: 25px;
             position: relative;
             z-index: 5; /* Поверх дисков */
-            height: 100%;
             box-sizing: border-box;
+        }
+
+        #widget-column {
+            background: var(--color-right-column);
+            height: var(--height-right-column);
         }
 
         .link-list {
