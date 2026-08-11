@@ -14,11 +14,10 @@
             min-height: 100vh;
             background: radial-gradient(ellipse at 50% 20%, #26282f, #15161a 70%);
             display: flex;
-            flex-direction: row;
-            align-items: flex-start;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
             font-family: 'DotGothic16', sans-serif;
-            overflow-x: hidden;
         }
         
         body::before {
@@ -31,14 +30,6 @@
             z-index: -1;
         }
 
-        .main-content {
-            display: flex;
-            gap: 20px;
-            padding: 20px;
-            justify-content: center;
-            width: 100%;
-        }
-
         .stage {
             position: relative;
             padding: 20px;
@@ -46,177 +37,6 @@
             flex-direction: column;
             align-items: center;
             gap: 20px;
-        }
-
-        /* БОКОВАЯ ПАНЕЛЬ НАСТРОЕК */
-        .settings-panel {
-            position: fixed;
-            right: 0;
-            top: 0;
-            width: 350px;
-            height: 100vh;
-            background: #1a1c22;
-            border-left: 1px solid #444;
-            overflow-y: auto;
-            padding: 20px;
-            color: #e0e0e0;
-            font-size: 12px;
-            z-index: 1000;
-            box-shadow: -4px 0 10px rgba(0,0,0,0.5);
-        }
-
-        .settings-panel h2 {
-            margin: 0 0 15px 0;
-            font-size: 14px;
-            color: #ffb841;
-            border-bottom: 1px solid #444;
-            padding-bottom: 10px;
-        }
-
-        .settings-panel h3 {
-            margin: 15px 0 10px 0;
-            font-size: 11px;
-            color: #b0b0b0;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .element-group {
-            margin-bottom: 20px;
-            padding: 10px;
-            background: #252a33;
-            border-radius: 4px;
-            border-left: 2px solid #ffb841;
-        }
-
-        .element-group h4 {
-            margin: 0 0 10px 0;
-            font-size: 11px;
-            color: #ffb841;
-        }
-
-        .control-row {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            margin-bottom: 8px;
-        }
-
-        .control-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 10px;
-            color: #a0a0a0;
-        }
-
-        .control-label span:last-child {
-            color: #ffb841;
-            font-weight: bold;
-            min-width: 40px;
-            text-align: right;
-        }
-
-        input[type="range"] {
-            width: 100%;
-            height: 6px;
-            border-radius: 3px;
-            background: #444;
-            outline: none;
-            -webkit-appearance: none;
-            appearance: none;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: #ffb841;
-            cursor: pointer;
-            box-shadow: 0 0 4px rgba(255,184,65,0.5);
-        }
-
-        input[type="range"]::-moz-range-thumb {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: #ffb841;
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 0 4px rgba(255,184,65,0.5);
-        }
-
-        .export-section {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #444;
-        }
-
-        .export-btn {
-            width: 100%;
-            padding: 10px;
-            background: #ffb841;
-            color: #1a1c22;
-            border: none;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 10px;
-            transition: background 0.2s;
-        }
-
-        .export-btn:hover {
-            background: #ffc869;
-        }
-
-        .export-btn.secondary {
-            background: #2b4066;
-            color: #f4f6ff;
-        }
-
-        .export-btn.secondary:hover {
-            background: #3c5685;
-        }
-
-        .close-settings {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            color: #ffb841;
-            font-size: 20px;
-            cursor: pointer;
-            padding: 0;
-            width: 24px;
-            height: 24px;
-            display: none;
-        }
-
-        @media (max-width: 1200px) {
-            .settings-panel {
-                width: 100%;
-                position: fixed;
-                top: 0;
-                right: auto;
-                left: 0;
-                height: auto;
-                max-height: 40vh;
-                border-left: none;
-                border-bottom: 1px solid #444;
-                overflow-y: auto;
-            }
-
-            .main-content {
-                flex-direction: column;
-                padding-top: 50vh;
-            }
-
-            .close-settings {
-                display: block;
-            }
         }
 
         /* КОНТЕЙНЕР ТЕЛЕФОНА */
@@ -234,10 +54,9 @@
             /* НАСТРОЙКИ ТЕЛЕФОНА */
             --phone-x: 0px;           /* Смещение по X */
             --phone-y: 0px;           /* Смещение по Y */
-            --phone-scale: 1;         /* Масштаб */
             --phone-width: 280px;     /* Ширина корпуса */
             --phone-height: 520px;    /* Высота корпуса */
-            transform: translate(var(--phone-x), var(--phone-y)) scale(var(--phone-scale));
+            transform: translate(var(--phone-x), var(--phone-y));
             width: var(--phone-width);
             height: var(--phone-height);
             background-size: contain;
@@ -263,6 +82,158 @@
             max-width: 100%;
             height: auto;
             display: block;
+            box-shadow: none;
+            border: none;
+        }
+
+        /* ПАНЕЛЬ УПРАВЛЕНИЯ */
+        .control-panel {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 380px;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-left: 2px solid #0f3460;
+            overflow-y: auto;
+            z-index: 1000;
+            padding: 20px;
+            color: #eee;
+            font-size: 13px;
+        }
+
+        .control-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .control-panel::-webkit-scrollbar-track {
+            background: #16213e;
+        }
+
+        .control-panel::-webkit-scrollbar-thumb {
+            background: #0f3460;
+            border-radius: 4px;
+        }
+
+        .control-panel::-webkit-scrollbar-thumb:hover {
+            background: #1a5f7a;
+        }
+
+        .panel-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #00d4ff;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #0f3460;
+        }
+
+        .element-group {
+            background: #0f1419;
+            border: 1px solid #0f3460;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+
+        .element-name {
+            color: #00d4ff;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+
+        .control-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .control-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .control-input-group label {
+            font-size: 11px;
+            color: #aaa;
+            text-transform: uppercase;
+        }
+
+        .control-input-group input[type="range"] {
+            width: 100%;
+            height: 5px;
+            border-radius: 3px;
+            background: #1a3a4a;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .control-input-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #00d4ff;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
+        }
+
+        .control-input-group input[type="range"]::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #00d4ff;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
+        }
+
+        .control-input-group input[type="number"] {
+            background: #1a3a4a;
+            border: 1px solid #0f3460;
+            color: #00d4ff;
+            padding: 4px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .control-input-group input[type="number"]:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
+        }
+
+        .export-button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            border: none;
+            border-radius: 6px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 12px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .export-button:hover {
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+            transform: scale(1.02);
+        }
+
+        .export-button:active {
+            transform: scale(0.98);
+        }
+
+        .stage {
+            margin-right: 400px;
         }
 
         /* КНОПКИ ТЕЛЕФОНА */
@@ -275,7 +246,6 @@
             cursor: pointer;
             opacity: 0.95;
             transition: opacity 0.1s;
-            --btn-scale: 1;
         }
 
         .phone-button:hover {
@@ -283,7 +253,7 @@
         }
 
         .phone-button:active {
-            transform: scale(calc(var(--btn-scale) * 0.98));
+            transform: scale(0.98);
         }
 
         /* НАСТРОЙКИ ПОЗИЦИЙ И РАЗМЕРОВ КНОПОК */
@@ -298,7 +268,6 @@
             top: var(--btn-y);
             width: var(--btn-w);
             height: var(--btn-h);
-            transform: scale(var(--btn-scale));
             background-image: url('телефон/бр1.png');
         }
 
@@ -312,7 +281,6 @@
             top: var(--btn-y);
             width: var(--btn-w);
             height: var(--btn-h);
-            transform: scale(var(--btn-scale));
             background-image: url('телефон/бр2.png');
         }
 
@@ -326,7 +294,6 @@
             top: var(--btn-y);
             width: var(--btn-w);
             height: var(--btn-h);
-            transform: scale(var(--btn-scale));
             background-image: url('телефон/бр3.png');
         }
 
@@ -340,7 +307,6 @@
             top: var(--btn-y);
             width: var(--btn-w);
             height: var(--btn-h);
-            transform: scale(var(--btn-scale));
             background-image: url('телефон/бр4.png');
         }
 
@@ -354,7 +320,6 @@
             top: var(--btn-y);
             width: var(--btn-w);
             height: var(--btn-h);
-            transform: scale(var(--btn-scale));
             background-image: url('телефон/бр5.png');
         }
 
@@ -368,7 +333,6 @@
             top: var(--btn-y);
             width: var(--btn-w);
             height: var(--btn-h);
-            transform: scale(var(--btn-scale));
             background-image: url('телефон/бр6.png');
         }
 
@@ -382,7 +346,6 @@
             top: var(--btn-y);
             width: var(--btn-w);
             height: var(--btn-h);
-            transform: scale(var(--btn-scale));
             background-image: url('телефон/бр7.png');
         }
 
@@ -396,7 +359,6 @@
             top: var(--btn-y);
             width: var(--btn-w);
             height: var(--btn-h);
-            transform: scale(var(--btn-scale));
             background-image: url('телефон/бр8.png');
         }
 
@@ -410,7 +372,6 @@
             top: var(--btn-y);
             width: var(--btn-w);
             height: var(--btn-h);
-            transform: scale(var(--btn-scale));
             background-image: url('телефон/бр9.png');
         }
 
@@ -424,7 +385,6 @@
             top: var(--btn-y);
             width: var(--btn-w);
             height: var(--btn-h);
-            transform: scale(var(--btn-scale));
             background-image: url('телефон/бр10.png');
         }
 
@@ -438,7 +398,6 @@
             top: var(--btn-y);
             width: var(--btn-w);
             height: var(--btn-h);
-            transform: scale(var(--btn-scale));
             background-image: url('телефон/бр11.png');
         }
 
@@ -452,7 +411,6 @@
             top: var(--btn-y);
             width: var(--btn-w);
             height: var(--btn-h);
-            transform: scale(var(--btn-scale));
             background-image: url('телефон/бр12.png');
         }
 
@@ -468,7 +426,6 @@
             top: var(--btn-y);
             width: var(--btn-w);
             height: var(--btn-h);
-            transform: scale(var(--btn-scale));
             background-image: url('телефон/влево.png');
         }
 
@@ -482,7 +439,6 @@
             top: var(--btn-y);
             width: var(--btn-w);
             height: var(--btn-h);
-            transform: scale(var(--btn-scale));
             background-image: url('телефон/вправо.png');
         }
 
@@ -496,7 +452,6 @@
             top: var(--btn-y);
             width: var(--btn-w);
             height: var(--btn-h);
-            transform: scale(var(--btn-scale));
             background-image: url('телефон/вверх.png');
         }
 
@@ -510,7 +465,6 @@
             top: var(--btn-y);
             width: var(--btn-w);
             height: var(--btn-h);
-            transform: scale(var(--btn-scale));
             background-image: url('телефон/вниз.png');
         }
 
@@ -524,7 +478,6 @@
             top: var(--btn-y);
             width: var(--btn-w);
             height: var(--btn-h);
-            transform: scale(var(--btn-scale));
             background-image: url('телефон/центр.png');
         }
 
@@ -584,7 +537,6 @@
 </head>
 <body>
 
-<div class="main-content">
 <div class="stage">
     <div class="phone-container">
         <!-- Корпус телефона -->
@@ -638,177 +590,48 @@
         <a href="index.html" class="back">← Вернуться на главную</a>
     </div>
 </div>
-</div>
 
-<!-- ПАНЕЛЬ НАСТРОЕК -->
-<div class="settings-panel" id="settingsPanel">
-    <button class="close-settings" id="closeSettings">✕</button>
-    <h2>⚙️ Параметры Элементов</h2>
+<!-- ПАНЕЛЬ УПРАВЛЕНИЯ -->
+<div class="control-panel" id="controlPanel">
+    <div class="panel-title">⚙️ Настройка телефона</div>
     
-    <h3>Телефон (Корпус)</h3>
+    <!-- Корпус телефона -->
     <div class="element-group">
-        <h4>phone-body</h4>
+        <div class="element-name">📱 Корпус телефона</div>
         <div class="control-row">
-            <div class="control-label">
-                <span>Влево (X):</span>
-                <span id="val-phone-x">0px</span>
+            <div class="control-input-group">
+                <label>X позиция</label>
+                <input type="range" id="phone-x" min="-200" max="500" value="0" step="1">
+                <input type="number" id="phone-x-input" min="-200" max="500" value="0">
             </div>
-            <input type="range" id="slider-phone-x" min="-100" max="100" value="0" step="1">
-        </div>
-        <div class="control-row">
-            <div class="control-label">
-                <span>Вверх (Y):</span>
-                <span id="val-phone-y">0px</span>
+            <div class="control-input-group">
+                <label>Y позиция</label>
+                <input type="range" id="phone-y" min="-200" max="500" value="0" step="1">
+                <input type="number" id="phone-y-input" min="-200" max="500" value="0">
             </div>
-            <input type="range" id="slider-phone-y" min="-100" max="100" value="0" step="1">
         </div>
         <div class="control-row">
-            <div class="control-label">
-                <span>Масштаб:</span>
-                <span id="val-phone-scale">1.0</span>
+            <div class="control-input-group">
+                <label>Ширина</label>
+                <input type="range" id="phone-width" min="150" max="600" value="280" step="1">
+                <input type="number" id="phone-width-input" min="150" max="600" value="280">
             </div>
-            <input type="range" id="slider-phone-scale" min="0.5" max="1.5" value="1" step="0.1">
+            <div class="control-input-group">
+                <label>Высота</label>
+                <input type="range" id="phone-height" min="300" max="800" value="520" step="1">
+                <input type="number" id="phone-height-input" min="300" max="800" value="520">
+            </div>
         </div>
     </div>
 
-    <h3>Навигационные Кнопки</h3>
-    
-    <div class="element-group">
-        <h4>Вверх (btn-up)</h4>
-        <div class="control-row">
-            <div class="control-label"><span>X:</span><span id="val-btn-up-x">120px</span></div>
-            <input type="range" id="slider-btn-up-x" min="0" max="250" value="120" step="1">
-        </div>
-        <div class="control-row">
-            <div class="control-label"><span>Y:</span><span id="val-btn-up-y">210px</span></div>
-            <input type="range" id="slider-btn-up-y" min="100" max="500" value="210" step="1">
-        </div>
-        <div class="control-row">
-            <div class="control-label"><span>Масштаб:</span><span id="val-btn-up-s">1.0</span></div>
-            <input type="range" id="slider-btn-up-s" min="0.5" max="1.5" value="1" step="0.1">
-        </div>
-    </div>
+    <!-- Навигационные кнопки -->
+    <div id="navButtonsPanel"></div>
 
-    <div class="element-group">
-        <h4>Вниз (btn-down)</h4>
-        <div class="control-row">
-            <div class="control-label"><span>X:</span><span id="val-btn-down-x">120px</span></div>
-            <input type="range" id="slider-btn-down-x" min="0" max="250" value="120" step="1">
-        </div>
-        <div class="control-row">
-            <div class="control-label"><span>Y:</span><span id="val-btn-down-y">310px</span></div>
-            <input type="range" id="slider-btn-down-y" min="100" max="500" value="310" step="1">
-        </div>
-        <div class="control-row">
-            <div class="control-label"><span>Масштаб:</span><span id="val-btn-down-s">1.0</span></div>
-            <input type="range" id="slider-btn-down-s" min="0.5" max="1.5" value="1" step="0.1">
-        </div>
-    </div>
+    <!-- Цифровые кнопки -->
+    <div id="numButtonsPanel"></div>
 
-    <div class="element-group">
-        <h4>Влево (btn-left)</h4>
-        <div class="control-row">
-            <div class="control-label"><span>X:</span><span id="val-btn-left-x">35px</span></div>
-            <input type="range" id="slider-btn-left-x" min="0" max="250" value="35" step="1">
-        </div>
-        <div class="control-row">
-            <div class="control-label"><span>Y:</span><span id="val-btn-left-y">260px</span></div>
-            <input type="range" id="slider-btn-left-y" min="100" max="500" value="260" step="1">
-        </div>
-        <div class="control-row">
-            <div class="control-label"><span>Масштаб:</span><span id="val-btn-left-s">1.0</span></div>
-            <input type="range" id="slider-btn-left-s" min="0.5" max="1.5" value="1" step="0.1">
-        </div>
-    </div>
-
-    <div class="element-group">
-        <h4>Вправо (btn-right)</h4>
-        <div class="control-row">
-            <div class="control-label"><span>X:</span><span id="val-btn-right-x">210px</span></div>
-            <input type="range" id="slider-btn-right-x" min="0" max="250" value="210" step="1">
-        </div>
-        <div class="control-row">
-            <div class="control-label"><span>Y:</span><span id="val-btn-right-y">260px</span></div>
-            <input type="range" id="slider-btn-right-y" min="100" max="500" value="260" step="1">
-        </div>
-        <div class="control-row">
-            <div class="control-label"><span>Масштаб:</span><span id="val-btn-right-s">1.0</span></div>
-            <input type="range" id="slider-btn-right-s" min="0.5" max="1.5" value="1" step="0.1">
-        </div>
-    </div>
-
-    <div class="element-group">
-        <h4>Центр (btn-center)</h4>
-        <div class="control-row">
-            <div class="control-label"><span>X:</span><span id="val-btn-center-x">110px</span></div>
-            <input type="range" id="slider-btn-center-x" min="0" max="250" value="110" step="1">
-        </div>
-        <div class="control-row">
-            <div class="control-label"><span>Y:</span><span id="val-btn-center-y">255px</span></div>
-            <input type="range" id="slider-btn-center-y" min="100" max="500" value="255" step="1">
-        </div>
-        <div class="control-row">
-            <div class="control-label"><span>Масштаб:</span><span id="val-btn-center-s">1.0</span></div>
-            <input type="range" id="slider-btn-center-s" min="0.5" max="1.5" value="1" step="0.1">
-        </div>
-    </div>
-
-    <h3>Числовые Кнопки</h3>
-    
-    <div class="element-group">
-        <h4>Кнопки 1-3 (бр1-3)</h4>
-        <div class="control-row">
-            <div class="control-label"><span>Y:</span><span id="val-row1-y">320px</span></div>
-            <input type="range" id="slider-row1-y" min="200" max="400" value="320" step="1">
-        </div>
-        <div class="control-row">
-            <div class="control-label"><span>Масштаб:</span><span id="val-row1-s">1.0</span></div>
-            <input type="range" id="slider-row1-s" min="0.5" max="1.5" value="1" step="0.1">
-        </div>
-    </div>
-
-    <div class="element-group">
-        <h4>Кнопки 4-6 (бр4-6)</h4>
-        <div class="control-row">
-            <div class="control-label"><span>Y:</span><span id="val-row2-y">380px</span></div>
-            <input type="range" id="slider-row2-y" min="200" max="500" value="380" step="1">
-        </div>
-        <div class="control-row">
-            <div class="control-label"><span>Масштаб:</span><span id="val-row2-s">1.0</span></div>
-            <input type="range" id="slider-row2-s" min="0.5" max="1.5" value="1" step="0.1">
-        </div>
-    </div>
-
-    <div class="element-group">
-        <h4>Кнопки 7-9 (бр7-9)</h4>
-        <div class="control-row">
-            <div class="control-label"><span>Y:</span><span id="val-row3-y">440px</span></div>
-            <input type="range" id="slider-row3-y" min="300" max="500" value="440" step="1">
-        </div>
-        <div class="control-row">
-            <div class="control-label"><span>Масштаб:</span><span id="val-row3-s">1.0</span></div>
-            <input type="range" id="slider-row3-s" min="0.5" max="1.5" value="1" step="0.1">
-        </div>
-    </div>
-
-    <div class="element-group">
-        <h4>Кнопки *-# (бр10-12)</h4>
-        <div class="control-row">
-            <div class="control-label"><span>Y:</span><span id="val-row4-y">500px</span></div>
-            <input type="range" id="slider-row4-y" min="300" max="600" value="500" step="1">
-        </div>
-        <div class="control-row">
-            <div class="control-label"><span>Масштаб:</span><span id="val-row4-s">1.0</span></div>
-            <input type="range" id="slider-row4-s" min="0.5" max="1.5" value="1" step="0.1">
-        </div>
-    </div>
-
-    <div class="export-section">
-        <h3>Экспорт</h3>
-        <button class="export-btn" id="exportCss">Скачать CSS</button>
-        <button class="export-btn secondary" id="exportJson">Скачать JSON</button>
-        <button class="export-btn secondary" id="resetSettings">Сбросить</button>
-    </div>
+    <!-- Кнопка экспорта -->
+    <button class="export-button" id="exportBtn">📋 Экспортировать CSS</button>
 </div>
 
 <script>
@@ -1296,231 +1119,289 @@
   });
 
   // =================================================================
-  // ПАНЕЛЬ НАСТРОЕК - Управление слайдерами
+  // СИСТЕМА УПРАВЛЕНИЯ ПАНЕЛЬЮ
   // =================================================================
 
-  const elements = {
-    'phone-x': { slider: 'slider-phone-x', label: 'val-phone-x', target: '.phone-body', css: '--phone-x', unit: 'px', defaultVal: 0 },
-    'phone-y': { slider: 'slider-phone-y', label: 'val-phone-y', target: '.phone-body', css: '--phone-y', unit: 'px', defaultVal: 0 },
-    'phone-scale': { slider: 'slider-phone-scale', label: 'val-phone-scale', target: '.phone-body', css: '--phone-scale', unit: '', defaultVal: 1, transform: true },
+  // Определяем все элементы для управления
+  const buttonElements = [
+    // Навигационные кнопки
+    { id: 'btnNavUp', name: '⬆️ Вверх', selector: '.btn-up' },
+    { id: 'btnNavDown', name: '⬇️ Вниз', selector: '.btn-down' },
+    { id: 'btnNavLeft', name: '⬅️ Влево', selector: '.btn-left' },
+    { id: 'btnNavRight', name: '➡️ Вправо', selector: '.btn-right' },
+    { id: 'btnCenter', name: '⭕ Центр', selector: '.btn-center' },
+    // Цифровые кнопки
+    { id: 'btn1', name: '1️⃣ Кнопка 1', selector: '.btn-1' },
+    { id: 'btn2', name: '2️⃣ Кнопка 2', selector: '.btn-2' },
+    { id: 'btn3', name: '3️⃣ Кнопка 3', selector: '.btn-3' },
+    { id: 'btn4', name: '4️⃣ Кнопка 4', selector: '.btn-4' },
+    { id: 'btn5', name: '5️⃣ Кнопка 5', selector: '.btn-5' },
+    { id: 'btn6', name: '6️⃣ Кнопка 6', selector: '.btn-6' },
+    { id: 'btn7', name: '7️⃣ Кнопка 7', selector: '.btn-7' },
+    { id: 'btn8', name: '8️⃣ Кнопка 8', selector: '.btn-8' },
+    { id: 'btn9', name: '9️⃣ Кнопка 9', selector: '.btn-9' },
+    { id: 'btnStar', name: '⭐ Звёздочка (*)', selector: '.btn-10' },
+    { id: 'btn0', name: '0️⃣ Кнопка 0', selector: '.btn-11' },
+    { id: 'btnHash', name: '#️⃣ Решётка (#)', selector: '.btn-12' },
+  ];
 
-    'btn-up-x': { slider: 'slider-btn-up-x', label: 'val-btn-up-x', target: '.btn-up', css: '--btn-x', unit: 'px', defaultVal: 120 },
-    'btn-up-y': { slider: 'slider-btn-up-y', label: 'val-btn-up-y', target: '.btn-up', css: '--btn-y', unit: 'px', defaultVal: 210 },
-    'btn-up-s': { slider: 'slider-btn-up-s', label: 'val-btn-up-s', target: '.btn-up', css: '--btn-scale', unit: '', defaultVal: 1, transform: true },
-
-    'btn-down-x': { slider: 'slider-btn-down-x', label: 'val-btn-down-x', target: '.btn-down', css: '--btn-x', unit: 'px', defaultVal: 120 },
-    'btn-down-y': { slider: 'slider-btn-down-y', label: 'val-btn-down-y', target: '.btn-down', css: '--btn-y', unit: 'px', defaultVal: 310 },
-    'btn-down-s': { slider: 'slider-btn-down-s', label: 'val-btn-down-s', target: '.btn-down', css: '--btn-scale', unit: '', defaultVal: 1, transform: true },
-
-    'btn-left-x': { slider: 'slider-btn-left-x', label: 'val-btn-left-x', target: '.btn-left', css: '--btn-x', unit: 'px', defaultVal: 35 },
-    'btn-left-y': { slider: 'slider-btn-left-y', label: 'val-btn-left-y', target: '.btn-left', css: '--btn-y', unit: 'px', defaultVal: 260 },
-    'btn-left-s': { slider: 'slider-btn-left-s', label: 'val-btn-left-s', target: '.btn-left', css: '--btn-scale', unit: '', defaultVal: 1, transform: true },
-
-    'btn-right-x': { slider: 'slider-btn-right-x', label: 'val-btn-right-x', target: '.btn-right', css: '--btn-x', unit: 'px', defaultVal: 210 },
-    'btn-right-y': { slider: 'slider-btn-right-y', label: 'val-btn-right-y', target: '.btn-right', css: '--btn-y', unit: 'px', defaultVal: 260 },
-    'btn-right-s': { slider: 'slider-btn-right-s', label: 'val-btn-right-s', target: '.btn-right', css: '--btn-scale', unit: '', defaultVal: 1, transform: true },
-
-    'btn-center-x': { slider: 'slider-btn-center-x', label: 'val-btn-center-x', target: '.btn-center', css: '--btn-x', unit: 'px', defaultVal: 110 },
-    'btn-center-y': { slider: 'slider-btn-center-y', label: 'val-btn-center-y', target: '.btn-center', css: '--btn-y', unit: 'px', defaultVal: 255 },
-    'btn-center-s': { slider: 'slider-btn-center-s', label: 'val-btn-center-s', target: '.btn-center', css: '--btn-scale', unit: '', defaultVal: 1, transform: true },
-
-    'row1-y': { slider: 'slider-row1-y', label: 'val-row1-y', targets: ['.btn-1', '.btn-2', '.btn-3'], css: '--btn-y', unit: 'px', defaultVal: 320 },
-    'row1-s': { slider: 'slider-row1-s', label: 'val-row1-s', targets: ['.btn-1', '.btn-2', '.btn-3'], css: '--btn-scale', unit: '', defaultVal: 1, transform: true },
-
-    'row2-y': { slider: 'slider-row2-y', label: 'val-row2-y', targets: ['.btn-4', '.btn-5', '.btn-6'], css: '--btn-y', unit: 'px', defaultVal: 380 },
-    'row2-s': { slider: 'slider-row2-s', label: 'val-row2-s', targets: ['.btn-4', '.btn-5', '.btn-6'], css: '--btn-scale', unit: '', defaultVal: 1, transform: true },
-
-    'row3-y': { slider: 'slider-row3-y', label: 'val-row3-y', targets: ['.btn-7', '.btn-8', '.btn-9'], css: '--btn-y', unit: 'px', defaultVal: 440 },
-    'row3-s': { slider: 'slider-row3-s', label: 'val-row3-s', targets: ['.btn-7', '.btn-8', '.btn-9'], css: '--btn-scale', unit: '', defaultVal: 1, transform: true },
-
-    'row4-y': { slider: 'slider-row4-y', label: 'val-row4-y', targets: ['.btn-10', '.btn-11', '.btn-12'], css: '--btn-y', unit: 'px', defaultVal: 500 },
-    'row4-s': { slider: 'slider-row4-s', label: 'val-row4-s', targets: ['.btn-10', '.btn-11', '.btn-12'], css: '--btn-scale', unit: '', defaultVal: 1, transform: true }
+  // Начальные значения кнопок (в px)
+  const buttonValues = {
+    'btnNavUp': { x: 120, y: 210, w: 50, h: 50 },
+    'btnNavDown': { x: 120, y: 310, w: 50, h: 50 },
+    'btnNavLeft': { x: 35, y: 260, w: 50, h: 50 },
+    'btnNavRight': { x: 210, y: 260, w: 50, h: 50 },
+    'btnCenter': { x: 110, y: 255, w: 70, h: 70 },
+    'btn1': { x: 20, y: 320, w: 40, h: 40 },
+    'btn2': { x: 120, y: 320, w: 40, h: 40 },
+    'btn3': { x: 220, y: 320, w: 40, h: 40 },
+    'btn4': { x: 20, y: 380, w: 40, h: 40 },
+    'btn5': { x: 120, y: 380, w: 40, h: 40 },
+    'btn6': { x: 220, y: 380, w: 40, h: 40 },
+    'btn7': { x: 20, y: 440, w: 40, h: 40 },
+    'btn8': { x: 120, y: 440, w: 40, h: 40 },
+    'btn9': { x: 220, y: 440, w: 40, h: 40 },
+    'btnStar': { x: 20, y: 500, w: 40, h: 40 },
+    'btn0': { x: 120, y: 500, w: 40, h: 40 },
+    'btnHash': { x: 220, y: 500, w: 40, h: 40 },
   };
 
-  function updateValue(key) {
-    const elem = elements[key];
-    if (!elem) return;
+  // Функция создания UI элементов управления
+  function createControlPanel() {
+    const style = document.createElement('style');
+    style.textContent = `
+      .btn-label { font-weight: bold; color: #00d4ff; margin-bottom: 6px; }
+    `;
+    document.head.appendChild(style);
 
-    const slider = document.getElementById(elem.slider);
-    const label = document.getElementById(elem.label);
-    const value = parseFloat(slider.value);
+    // Панель навигационных кнопок
+    const navPanel = document.getElementById('navButtonsPanel');
+    const navTitle = document.createElement('div');
+    navTitle.className = 'panel-title';
+    navTitle.textContent = '🎮 Навигационные кнопки';
+    navPanel.appendChild(navTitle);
 
-    // Обновляем лейбл
-    if (elem.transform) {
-      label.textContent = value.toFixed(1);
-    } else {
-      label.textContent = value + elem.unit;
-    }
+    buttonElements.slice(0, 5).forEach(btn => {
+      navPanel.appendChild(createButtonGroup(btn));
+    });
 
-    // Обновляем CSS переменную
-    if (elem.target) {
-      const el = document.querySelector(elem.target);
-      if (el) {
-        if (elem.transform) {
-          el.style.setProperty(elem.css, value);
-        } else {
-          el.style.setProperty(elem.css, value + elem.unit);
-        }
-      }
-    } else if (elem.targets) {
-      elem.targets.forEach(selector => {
-        const el = document.querySelector(selector);
-        if (el) {
-          if (elem.transform) {
-            el.style.setProperty(elem.css, value);
-          } else {
-            el.style.setProperty(elem.css, value + elem.unit);
-          }
-        }
-      });
-    }
+    // Панель цифровых кнопок
+    const numPanel = document.getElementById('numButtonsPanel');
+    const numTitle = document.createElement('div');
+    numTitle.className = 'panel-title';
+    numTitle.style.marginTop = '15px';
+    numTitle.textContent = '🔢 Цифровые кнопки';
+    numPanel.appendChild(numTitle);
 
-    // Сохраняем в localStorage
-    localStorage.setItem(`phone-config-${key}`, value);
+    buttonElements.slice(5).forEach(btn => {
+      numPanel.appendChild(createButtonGroup(btn));
+    });
   }
 
-  // Инициализируем слайдеры
-  Object.keys(elements).forEach(key => {
-    const elem = elements[key];
-    const slider = document.getElementById(elem.slider);
-    if (slider) {
-      // Загружаем сохраненное значение из localStorage
-      const saved = localStorage.getItem(`phone-config-${key}`);
-      if (saved !== null) {
-        slider.value = saved;
-      }
+  function createButtonGroup(btn) {
+    const group = document.createElement('div');
+    group.className = 'element-group';
+    
+    const name = document.createElement('div');
+    name.className = 'element-name';
+    name.textContent = btn.name;
+    group.appendChild(name);
 
-      // Вызываем updateValue один раз для инициализации
-      updateValue(key);
+    const row = document.createElement('div');
+    row.className = 'control-row';
+    
+    // X позиция
+    row.appendChild(createControl(
+      `${btn.id}-x`, 
+      'X позиция', 
+      buttonValues[btn.id].x, 
+      -100, 
+      400, 
+      btn.id, 
+      'x'
+    ));
 
-      // Добавляем обработчик изменения
-      slider.addEventListener('input', () => updateValue(key));
+    // Y позиция
+    row.appendChild(createControl(
+      `${btn.id}-y`, 
+      'Y позиция', 
+      buttonValues[btn.id].y, 
+      -100, 
+      600, 
+      btn.id, 
+      'y'
+    ));
+
+    group.appendChild(row);
+
+    const row2 = document.createElement('div');
+    row2.className = 'control-row';
+
+    // Ширина
+    row2.appendChild(createControl(
+      `${btn.id}-w`, 
+      'Ширина', 
+      buttonValues[btn.id].w, 
+      20, 
+      150, 
+      btn.id, 
+      'w'
+    ));
+
+    // Высота
+    row2.appendChild(createControl(
+      `${btn.id}-h`, 
+      'Высота', 
+      buttonValues[btn.id].h, 
+      20, 
+      150, 
+      btn.id, 
+      'h'
+    ));
+
+    group.appendChild(row2);
+
+    return group;
+  }
+
+  function createControl(id, label, value, min, max, btnId, param) {
+    const container = document.createElement('div');
+    container.className = 'control-input-group';
+
+    const labelEl = document.createElement('label');
+    labelEl.textContent = label;
+    container.appendChild(labelEl);
+
+    const slider = document.createElement('input');
+    slider.type = 'range';
+    slider.id = id;
+    slider.min = min;
+    slider.max = max;
+    slider.value = value;
+    slider.step = '1';
+    container.appendChild(slider);
+
+    const input = document.createElement('input');
+    input.type = 'number';
+    input.id = id + '-input';
+    input.min = min;
+    input.max = max;
+    input.value = value;
+    container.appendChild(input);
+
+    // События синхронизации
+    slider.addEventListener('input', () => {
+      input.value = slider.value;
+      updateButtonStyle(btnId, param, slider.value);
+    });
+
+    input.addEventListener('change', () => {
+      slider.value = input.value;
+      updateButtonStyle(btnId, param, input.value);
+    });
+
+    return container;
+  }
+
+  function updateButtonStyle(btnId, param, value) {
+    const element = document.getElementById(btnId);
+    if (!element) return;
+
+    buttonValues[btnId][param] = parseInt(value);
+
+    if (param === 'x') {
+      element.style.setProperty('--btn-x', value + 'px');
+    } else if (param === 'y') {
+      element.style.setProperty('--btn-y', value + 'px');
+    } else if (param === 'w') {
+      element.style.setProperty('--btn-w', value + 'px');
+    } else if (param === 'h') {
+      element.style.setProperty('--btn-h', value + 'px');
+    }
+  }
+
+  // События для корпуса телефона
+  ['phone-x', 'phone-y', 'phone-width', 'phone-height'].forEach(id => {
+    const range = document.getElementById(id);
+    const input = document.getElementById(id + '-input');
+
+    if (range && input) {
+      range.addEventListener('input', () => {
+        input.value = range.value;
+        updatePhoneStyle(id.replace('phone-', ''), range.value);
+      });
+
+      input.addEventListener('change', () => {
+        range.value = input.value;
+        updatePhoneStyle(id.replace('phone-', ''), input.value);
+      });
     }
   });
 
-  // Закрытие панели настроек
-  document.getElementById('closeSettings').addEventListener('click', () => {
-    document.getElementById('settingsPanel').style.right = '-100%';
-  });
+  function updatePhoneStyle(param, value) {
+    const phoneBody = document.getElementById('phoneBody');
+    if (!phoneBody) return;
+
+    if (param === 'x') {
+      phoneBody.style.setProperty('--phone-x', value + 'px');
+    } else if (param === 'y') {
+      phoneBody.style.setProperty('--phone-y', value + 'px');
+    } else if (param === 'width') {
+      phoneBody.style.setProperty('--phone-width', value + 'px');
+    } else if (param === 'height') {
+      phoneBody.style.setProperty('--phone-height', value + 'px');
+    }
+  }
 
   // Функция экспорта CSS
   function exportCSS() {
-    let css = '/* Сгенерированные настройки элементов телефона */\n\n';
+    let css = `/* КОРПУС ТЕЛЕФОНА */
+.phone-body {
+    --phone-x: ${document.getElementById('phone-x').value}px;
+    --phone-y: ${document.getElementById('phone-y').value}px;
+    --phone-width: ${document.getElementById('phone-width').value}px;
+    --phone-height: ${document.getElementById('phone-height').value}px;
+}
 
-    // Телефон
-    css += '/* Корпус телефона */\n.phone-body {\n';
-    const phoneX = document.getElementById('slider-phone-x').value;
-    const phoneY = document.getElementById('slider-phone-y').value;
-    const phoneScale = document.getElementById('slider-phone-scale').value;
-    css += `  --phone-x: ${phoneX}px;\n`;
-    css += `  --phone-y: ${phoneY}px;\n`;
-    css += `  --phone-scale: ${phoneScale};\n`;
-    css += `  transform: translate(var(--phone-x), var(--phone-y)) scale(var(--phone-scale));\n`;
-    css += '}\n\n';
+/* КНОПКИ */
+`;
 
-    // Навигационные кнопки
-    const navButtons = [
-      { class: '.btn-up', label: 'Вверх' },
-      { class: '.btn-down', label: 'Вниз' },
-      { class: '.btn-left', label: 'Влево' },
-      { class: '.btn-right', label: 'Вправо' },
-      { class: '.btn-center', label: 'Центр' }
-    ];
-
-    navButtons.forEach(btn => {
-      const x = document.getElementById(`slider-${btn.class.slice(1)}-x`).value;
-      const y = document.getElementById(`slider-${btn.class.slice(1)}-y`).value;
-      const s = document.getElementById(`slider-${btn.class.slice(1)}-s`).value;
-      css += `/* ${btn.label} */\n${btn.class} {\n`;
-      css += `  --btn-x: ${x}px;\n`;
-      css += `  --btn-y: ${y}px;\n`;
-      css += `  --btn-scale: ${s};\n`;
-      css += `  transform: scale(var(--btn-scale));\n`;
-      css += `  left: var(--btn-x);\n`;
-      css += `  top: var(--btn-y);\n`;
-      css += '}\n\n';
-    });
-
-    // Числовые кнопки
-    const rows = [
-      { selectors: ['.btn-1', '.btn-2', '.btn-3'], label: 'Кнопки 1-3', sliderId: 'row1' },
-      { selectors: ['.btn-4', '.btn-5', '.btn-6'], label: 'Кнопки 4-6', sliderId: 'row2' },
-      { selectors: ['.btn-7', '.btn-8', '.btn-9'], label: 'Кнопки 7-9', sliderId: 'row3' },
-      { selectors: ['.btn-10', '.btn-11', '.btn-12'], label: 'Кнопки *-#', sliderId: 'row4' }
-    ];
-
-    rows.forEach(row => {
-      const y = document.getElementById(`slider-${row.sliderId}-y`).value;
-      const s = document.getElementById(`slider-${row.sliderId}-s`).value;
-      css += `/* ${row.label} */\n`;
-      row.selectors.forEach(selector => {
-        css += `${selector},\n`;
-      });
-      css = css.slice(0, -2); // Удаляем последнюю запятую
-      css += ` {\n`;
-      css += `  --btn-y: ${y}px;\n`;
-      css += `  --btn-scale: ${s};\n`;
-      css += `  transform: scale(var(--btn-scale));\n`;
-      css += `  top: var(--btn-y);\n`;
-      css += '}\n\n';
+    buttonElements.forEach(btn => {
+      const vals = buttonValues[btn.id];
+      css += `\n/* ${btn.name} */
+.${btn.selector.substring(1)} {
+    --btn-x: ${vals.x}px;
+    --btn-y: ${vals.y}px;
+    --btn-w: ${vals.w}px;
+    --btn-h: ${vals.h}px;
+}
+`;
     });
 
     return css;
   }
 
-  // Функция экспорта JSON
-  function exportJSON() {
-    const data = {};
-    Object.keys(elements).forEach(key => {
-      const slider = document.getElementById(elements[key].slider);
-      if (slider) {
-        data[key] = parseFloat(slider.value);
-      }
-    });
-    return JSON.stringify(data, null, 2);
-  }
-
-  // Экспорт CSS
-  document.getElementById('exportCss').addEventListener('click', () => {
+  // Обработчик кнопки экспорта
+  document.getElementById('exportBtn').addEventListener('click', () => {
     const css = exportCSS();
-    const blob = new Blob([css], { type: 'text/css' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'phone-settings.css';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    
+    // Копируем в буфер обмена
+    navigator.clipboard.writeText(css).then(() => {
+      const btn = document.getElementById('exportBtn');
+      const originalText = btn.textContent;
+      btn.textContent = '✅ Скопировано!';
+      setTimeout(() => {
+        btn.textContent = originalText;
+      }, 2000);
+    });
+
+    // Также открываем в консоли
+    console.log('%c=== ЭКСПОРТИРОВАННЫЙ CSS ===', 'color: #00d4ff; font-size: 14px; font-weight: bold;');
+    console.log(css);
   });
 
-  // Экспорт JSON
-  document.getElementById('exportJson').addEventListener('click', () => {
-    const json = exportJSON();
-    const blob = new Blob([json], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'phone-settings.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  });
-
-  // Сброс настроек
-  document.getElementById('resetSettings').addEventListener('click', () => {
-    if (confirm('Вы уверены? Все настройки будут сброшены на значения по умолчанию.')) {
-      Object.keys(elements).forEach(key => {
-        const slider = document.getElementById(elements[key].slider);
-        if (slider) {
-          slider.value = elements[key].defaultVal;
-          updateValue(key);
-          localStorage.removeItem(`phone-config-${key}`);
-        }
-      });
-    }
-  });
+  // Инициализируем панель управления
+  createControlPanel();
 
   // Отрисовка
   document.fonts.ready.then(() => {
