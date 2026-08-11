@@ -1004,24 +1004,25 @@
 
   // Определение всех элементов для настройки
   const elementsConfig = {
-    'phoneBody': { name: 'Корпус телефона', el: '#phoneBody', defaults: { x: 0, y: 0, scale: 1 }, varPrefix: '--phone' },
-    'btn-up': { name: '🔼 Кнопка Вверх', el: '.btn-up', defaults: { x: 120, y: 210, scale: 1 }, varPrefix: '--btn' },
-    'btn-down': { name: '🔽 Кнопка Вниз', el: '.btn-down', defaults: { x: 120, y: 310, scale: 1 }, varPrefix: '--btn' },
-    'btn-left': { name: '◀ Кнопка Влево', el: '.btn-left', defaults: { x: 35, y: 260, scale: 1 }, varPrefix: '--btn' },
-    'btn-right': { name: '▶ Кнопка Вправо', el: '.btn-right', defaults: { x: 210, y: 260, scale: 1 }, varPrefix: '--btn' },
-    'btn-center': { name: '⭕ Центр', el: '.btn-center', defaults: { x: 110, y: 255, scale: 1 }, varPrefix: '--btn' },
-    'btn-1': { name: '1️⃣ Кнопка 1', el: '.btn-1', defaults: { x: 20, y: 320, scale: 1 }, varPrefix: '--btn' },
-    'btn-2': { name: '2️⃣ Кнопка 2', el: '.btn-2', defaults: { x: 120, y: 320, scale: 1 }, varPrefix: '--btn' },
-    'btn-3': { name: '3️⃣ Кнопка 3', el: '.btn-3', defaults: { x: 220, y: 320, scale: 1 }, varPrefix: '--btn' },
-    'btn-4': { name: '4️⃣ Кнопка 4', el: '.btn-4', defaults: { x: 20, y: 380, scale: 1 }, varPrefix: '--btn' },
-    'btn-5': { name: '5️⃣ Кнопка 5', el: '.btn-5', defaults: { x: 120, y: 380, scale: 1 }, varPrefix: '--btn' },
-    'btn-6': { name: '6️⃣ Кнопка 6', el: '.btn-6', defaults: { x: 220, y: 380, scale: 1 }, varPrefix: '--btn' },
-    'btn-7': { name: '7️⃣ Кнопка 7', el: '.btn-7', defaults: { x: 20, y: 440, scale: 1 }, varPrefix: '--btn' },
-    'btn-8': { name: '8️⃣ Кнопка 8', el: '.btn-8', defaults: { x: 120, y: 440, scale: 1 }, varPrefix: '--btn' },
-    'btn-9': { name: '9️⃣ Кнопка 9', el: '.btn-9', defaults: { x: 220, y: 440, scale: 1 }, varPrefix: '--btn' },
-    'btn-star': { name: '⭐ Кнопка *', el: '.btn-10', defaults: { x: 20, y: 500, scale: 1 }, varPrefix: '--btn' },
-    'btn-0': { name: '0️⃣ Кнопка 0', el: '.btn-11', defaults: { x: 120, y: 500, scale: 1 }, varPrefix: '--btn' },
-    'btn-hash': { name: '#️⃣ Кнопка #', el: '.btn-12', defaults: { x: 220, y: 500, scale: 1 }, varPrefix: '--btn' }
+    'phoneBody': { name: 'Корпус телефона', el: '#phoneBody', defaults: { x: 0, y: 0, width: 280 }, varPrefix: '--phone', isPhone: true },
+    'btn-up': { name: '🔼 Кнопка Вверх', el: '.btn-up', defaults: { x: 120, y: 210, width: 50 }, varPrefix: '--btn' },
+    'btn-down': { name: '🔽 Кнопка Вниз', el: '.btn-down', defaults: { x: 120, y: 310, width: 50 }, varPrefix: '--btn' },
+    'btn-left': { name: '◀ Кнопка Влево', el: '.btn-left', defaults: { x: 35, y: 260, width: 50 }, varPrefix: '--btn' },
+    'btn-right': { name: '▶ Кнопка Вправо', el: '.btn-right', defaults: { x: 210, y: 260, width: 50 }, varPrefix: '--btn' },
+    'btn-center': { name: '⭕ Центр', el: '.btn-center', defaults: { x: 110, y: 255, width: 70 }, varPrefix: '--btn' },
+    'btn-1': { name: '1️⃣ Кнопка 1', el: '.btn-1', defaults: { x: 20, y: 320, width: 40 }, varPrefix: '--btn' },
+    'btn-2': { name: '2️⃣ Кнопка 2', el: '.btn-2', defaults: { x: 120, y: 320, width: 40 }, varPrefix: '--btn' },
+    'btn-3': { name: '3️⃣ Кнопка 3', el: '.btn-3', defaults: { x: 220, y: 320, width: 40 }, varPrefix: '--btn' },
+    'btn-4': { name: '4️⃣ Кнопка 4', el: '.btn-4', defaults: { x: 20, y: 380, width: 40 }, varPrefix: '--btn' },
+    'btn-5': { name: '5️⃣ Кнопка 5', el: '.btn-5', defaults: { x: 120, y: 380, width: 40 }, varPrefix: '--btn' },
+    'btn-6': { name: '6️⃣ Кнопка 6', el: '.btn-6', defaults: { x: 220, y: 380, width: 40 }, varPrefix: '--btn' },
+    'btn-7': { name: '7️⃣ Кнопка 7', el: '.btn-7', defaults: { x: 20, y: 440, width: 40 }, varPrefix: '--btn' },
+    'btn-8': { name: '8️⃣ Кнопка 8', el: '.btn-8', defaults: { x: 120, y: 440, width: 40 }, varPrefix: '--btn' },
+    'btn-9': { name: '9️⃣ Кнопка 9', el: '.btn-9', defaults: { x: 220, y: 440, width: 40 }, varPrefix: '--btn' },
+    'btn-star': { name: '⭐ Кнопка *', el: '.btn-10', defaults: { x: 20, y: 500, width: 40 }, varPrefix: '--btn' },
+    'btn-0': { name: '0️⃣ Кнопка 0', el: '.btn-11', defaults: { x: 120, y: 500, width: 40 }, varPrefix: '--btn' },
+    'btn-hash': { name: '#️⃣ Кнопка #', el: '.btn-12', defaults: { x: 220, y: 500, width: 40 }, varPrefix: '--btn' }
+  };
   };
 
   // Хранилище текущих значений
@@ -1042,29 +1043,32 @@
       div.className = 'element-control';
       
       const values = elementValues[key];
+      const minWidth = config.isPhone ? 140 : 20;
+      const maxWidth = config.isPhone ? 560 : 120;
+      const widthLabel = config.isPhone ? 'Ширина:' : 'Размер:';
 
       div.innerHTML = `
         <div class="element-name">${config.name}</div>
         
         <div class="control-row">
           <label class="control-label">X:</label>
-          <input type="range" class="control-slider" min="-500" max="500" step="1" value="${values.x}" data-key="${key}" data-prop="x">
-          <input type="number" class="control-input" min="-500" max="500" step="1" value="${values.x}" data-key="${key}" data-prop="x">
+          <input type="range" class="control-slider" min="-1000" max="1000" step="1" value="${values.x}" data-key="${key}" data-prop="x">
+          <input type="number" class="control-input" min="-1000" max="1000" step="1" value="${values.x}" data-key="${key}" data-prop="x">
           <span class="control-value">${values.x}px</span>
         </div>
 
         <div class="control-row">
           <label class="control-label">Y:</label>
-          <input type="range" class="control-slider" min="-500" max="500" step="1" value="${values.y}" data-key="${key}" data-prop="y">
-          <input type="number" class="control-input" min="-500" max="500" step="1" value="${values.y}" data-key="${key}" data-prop="y">
+          <input type="range" class="control-slider" min="-1000" max="1000" step="1" value="${values.y}" data-key="${key}" data-prop="y">
+          <input type="number" class="control-input" min="-1000" max="1000" step="1" value="${values.y}" data-key="${key}" data-prop="y">
           <span class="control-value">${values.y}px</span>
         </div>
 
         <div class="control-row">
-          <label class="control-label">S:</label>
-          <input type="range" class="control-slider" min="0.1" max="3" step="0.1" value="${values.scale}" data-key="${key}" data-prop="scale">
-          <input type="number" class="control-input" min="0.1" max="3" step="0.1" value="${values.scale}" data-key="${key}" data-prop="scale">
-          <span class="control-value">${values.scale.toFixed(1)}x</span>
+          <label class="control-label">W:</label>
+          <input type="range" class="control-slider" min="${minWidth}" max="${maxWidth}" step="1" value="${values.width}" data-key="${key}" data-prop="width">
+          <input type="number" class="control-input" min="${minWidth}" max="${maxWidth}" step="1" value="${values.width}" data-key="${key}" data-prop="width">
+          <span class="control-value">${values.width}px</span>
         </div>
       `;
 
@@ -1076,7 +1080,7 @@
       input.addEventListener('input', (e) => {
         const key = e.target.dataset.key;
         const prop = e.target.dataset.prop;
-        const value = prop === 'scale' ? parseFloat(e.target.value) : parseInt(e.target.value);
+        const value = parseInt(e.target.value);
 
         elementValues[key][prop] = value;
         updateAllInputs(key, prop, value);
@@ -1086,8 +1090,8 @@
   }
 
   function updateAllInputs(key, prop, value) {
-    const displayValue = prop === 'scale' ? value.toFixed(1) : value;
-    const unit = prop === 'scale' ? 'x' : 'px';
+    const displayValue = value;
+    const unit = 'px';
 
     document.querySelectorAll(`[data-key="${key}"][data-prop="${prop}"]`).forEach(input => {
       if (input.type === 'range' || input.type === 'number') {
@@ -1115,11 +1119,14 @@
       el.style.setProperty(`${config.varPrefix}-y`, `${values.y}px`);
       
       if (key === 'phoneBody') {
-        el.style.setProperty(`${config.varPrefix}-width`, `${280 * values.scale}px`);
-        el.style.setProperty(`${config.varPrefix}-height`, `${520 * values.scale}px`);
+        // Для телефона: пропорциональное масштабирование по высоте (520/280 = 1.857)
+        const height = Math.round(values.width * (520 / 280));
+        el.style.setProperty(`${config.varPrefix}-width`, `${values.width}px`);
+        el.style.setProperty(`${config.varPrefix}-height`, `${height}px`);
       } else {
-        el.style.setProperty(`${config.varPrefix}-w`, `${40 * values.scale}px`);
-        el.style.setProperty(`${config.varPrefix}-h`, `${40 * values.scale}px`);
+        // Для кнопок: квадратные (ширина = высота)
+        el.style.setProperty(`${config.varPrefix}-w`, `${values.width}px`);
+        el.style.setProperty(`${config.varPrefix}-h`, `${values.width}px`);
       }
     }
   }
@@ -1131,19 +1138,20 @@
       const values = elementValues[key];
       
       if (key === 'phoneBody') {
+        const height = Math.round(values.width * (520 / 280));
         css += `.phone-body {\n`;
         css += `    --phone-x: ${values.x}px;\n`;
         css += `    --phone-y: ${values.y}px;\n`;
-        css += `    --phone-width: ${280 * values.scale}px;\n`;
-        css += `    --phone-height: ${520 * values.scale}px;\n`;
+        css += `    --phone-width: ${values.width}px;\n`;
+        css += `    --phone-height: ${height}px;\n`;
         css += `}\n\n`;
       } else {
         const classList = config.el.substring(1); // Убрать точку
         css += `.${classList} {\n`;
         css += `    --btn-x: ${values.x}px;\n`;
         css += `    --btn-y: ${values.y}px;\n`;
-        css += `    --btn-w: ${40 * values.scale}px;\n`;
-        css += `    --btn-h: ${40 * values.scale}px;\n`;
+        css += `    --btn-w: ${values.width}px;\n`;
+        css += `    --btn-h: ${values.width}px;\n`;
         css += `}\n\n`;
       }
     });
