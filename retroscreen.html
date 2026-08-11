@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Retro Phone Screen - С прокруткой и страницами</title>
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 50% 20%, #26282f, #15161a 70%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    body::before {
+      content: "";
+      position: absolute; 
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 3px 3px;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .stage {
+      position: relative;
+      padding: 40px 24px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    canvas {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Стили для блоков управления */
+    .controls-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .scroll-controls {
+      display: flex;
+      gap: 12px;
+    }
+
+    .scroll-btn {
+      background: #2b4066;
+      color: #f4f6ff;
+      border: 1px solid #1a2740;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-family: 'DotGothic16', sans-serif;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .scroll-btn:hover { background: #3c5685; }
+    .scroll-btn:active { transform: translateY(2px); box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+    .scroll-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+
+<div class="stage">
+  <canvas id="mockupCanvas"></canvas>
+  
+  <div class="controls-wrapper">
+    <!-- Кнопки переключения страниц -->
+    <div class="scroll-controls">
+      <button class="scroll-btn" id="btnPrev">◄ Влево</button>
+      <button class="scroll-btn" id="btnNext">Вправо ►</button>
+    </div>
+
+    <!-- Кнопки управления прокруткой текста -->
+    <div class="scroll-controls">
+      <button class="scroll-btn" id="btnUp">▲ Вверх</button>
+      <button class="scroll-btn" id="btnDown">▼ Вниз</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // =================================================================
+  // НАСТРОЙКИ ЭКРАНА И КОНТЕНТА
+  // =================================================================
+  const config = {
+    // --- УДОБНАЯ НАСТРОЙКА РАЗМЕРОВ ЭКРАНА ---
+    screenWidth: 230,      // Ширина дисплея в пикселях
+    bodyHeight: 170,       // Высота текстовой области дисплея в пикселях
+
+    fontStack: "'DotGothic16', sans-serif",
+    
+    bg: "#eef0e4",            
+    fg: "#1c1e16",            
+    titleBg: "#2b4066",       
+    titleFg: "#f4f6ff",       
+    
+    carrier: "au by KDDI",
+    clock: "19:24",
+    
+    // --- СПИСОК СТРАНИЦ ТЕЛЕФОНА ---
+    currentPage: 0,
+    pages: [
+      {
+        title: "悪夢療法 - Ч.1",
+        bodyText: "いつも半端にサンダルという格好の男が、今夜はスーツにマフラー姿で店に入って来た。\n\nラックの帽子を整理していた仕事中の私は、手を休めてその男の顔を確かめた。深く被った帽子のせいで顔がよく分かるのが日頃の女の客だといつも、私の心の中では小さく舌を巻いた。"
+      },
+      {
+        title: "悪夢療法 - Ч.2",
+        bodyText: "しかし、今日の彼は違った。何か重大な決意を秘めたような、そんな鋭い視線を私に向けている。外では冷たい雨が降り続いており、彼のコートの肩は少し濡れていた。\n\n「いらっしゃいませ」\n\n私は努めて冷静な声を出し、カウンターの奥から彼を見つめ返した。"
+      },
+      {
+        title: "悪夢療法 - Ч.3",
+        bodyText: "彼は無言のままゆっくりと近づいてくる...\n\n pocketから取り出したのは、古びた小さな鍵だった。テーブルの上にそれを静かに置くと、低い声で囁いた。\n\n「これを...探していたんだろう？」"
+      }
+    ],
+    
+    softLeft: "戻る",       
+    softRight: "メニュー",   
+    
+    signalLevel: 4,           
+    batteryLevel: 70,         
+    
+    margin: 40,               
+    shadow: true,             
+    lcdEffect: true,          
+    lcdIntensity: 0.45        
+  };
+  // =================================================================
+
+  const canvas = document.getElementById('mockupCanvas');
+  const ctx = canvas.getContext('2d');
+  const RENDER_SCALE = 3; 
+
+  // Константы разметки
+  const BEZEL_RADIUS = 14;
+  const BEZEL_PAD = 10;
+  const STATUS_H = 18, CARRIER_H = 20, TITLE_H = 30, SOFT_H = 20;
+  const BODY_PAD_TOP = 9, BODY_PAD_BOTTOM = 10, BODY_PAD_X = 8;
+  const BODY_FONT_SIZE = 12.5, BODY_LINE_HEIGHT = 23;
+
+  // Переменные состояния прокрутки
+  let textScrollY = 0;
+  let maxScrollY = 0;
+
+  // Функция расчета текущих границ экрана для обработки событий мыши
+  function getScreenBounds() {
+    const screenW = config.screenWidth;
+    const bodyH = config.bodyHeight;
+    const totalH = STATUS_H + CARRIER_H + TITLE_H + bodyH + SOFT_H;
+    const minX = config.margin + BEZEL_PAD;
+    const maxX = minX + screenW;
+    const minY = config.margin + BEZEL_PAD;
+    const maxY = minY + totalH;
+    return { minX, maxX, minY, maxY, totalH };
+  }
+
+  // Вспомогательные функции отрисовки
+  function shade(hex, amt){
+    const c = hex.replace('#','');
+    const n = parseInt(c.length===3 ? c.split('').map(ch=>ch+ch).join('') : c, 16);
+    let r=(n>>16)&255, g=(n>>8)&255, b=n&255;
+    r=Math.round(r*(1-amt)); g=Math.round(g*(1-amt)); b=Math.round(b*(1-amt));
+    return '#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('');
+  }
+
+  function roundRectPath(c, x, y, w, h, r){
+    c.beginPath();
+    c.moveTo(x+r, y);
+    c.arcTo(x+w, y, x+w, y+h, r);
+    c.arcTo(x+w, y+h, x, y+h, r);
+    c.arcTo(x, y+h, x, y, r);
+    c.arcTo(x, y, x+w, y, r);
+    c.closePath();
+  }
+
+  function wrapText(c, text, maxWidth){
+    const paragraphs = text.split('\n');
+    const lines = [];
+    for (const para of paragraphs){
+      if (para.length === 0){ lines.push(''); continue; }
+      let line = '';
+      for (const ch of para){
+        const test = line + ch;
+        if (c.measureText(test).width > maxWidth && line.length > 0){
+          lines.push(line);
+          line = ch;
+        } else {
+          line = test;
+        }
+      }
+      lines.push(line);
+    }
+    return lines;
+  }
+
+  function truncateToWidth(c, text, maxWidth){
+    if (c.measureText(text).width <= maxWidth) return text;
+    let t = text;
+    while (t.length > 0 && c.measureText(t + '…').width > maxWidth){ t = t.slice(0, -1); }
+    return t + '…';
+  }
+
+  function paintLcdEffect(c, w, h, intensity){
+    c.save();
+    c.fillStyle = `rgba(0,0,0,${0.18*intensity})`;
+    for(let sy = 0; sy < h; sy += 2){ c.fillRect(0, sy, w, 1); }
+    c.fillStyle = `rgba(0,0,0,${0.07*intensity})`;
+    for(let sx = 0; sx < w; sx += 2){ c.fillRect(sx, 0, 1, h); }
+    const glare = c.createLinearGradient(0, 0, w*0.6, h*0.4);
+    glare.addColorStop(0,    `rgba(255,255,255,${0.14*intensity})`);
+    glare.addColorStop(0.25, `rgba(255,255,255,${0.05*intensity})`);
+    glare.addColorStop(0.5,  `rgba(255,255,255,0)`);
+    glare.addColorStop(1,    `rgba(255,255,255,0)`);
+    c.fillStyle = glare;
+    c.fillRect(0, 0, w, h);
+    const cx = w/2, cy = h/2;
+    const maxR = Math.sqrt(cx*cx + cy*cy);
+    const vig = c.createRadialGradient(cx, cy, maxR*0.55, cx, cy, maxR);
+    vig.addColorStop(0, 'rgba(0,0,0,0)');
+    vig.addColorStop(1, `rgba(0,0,0,${0.45*intensity})`);
+    c.fillStyle = vig;
+    c.fillRect(0, 0, w, h);
+    c.restore();
+  }
+
+  function drawStatusIcons(c, x, y, fg, signalLevel, batteryLevel){
+    c.save();
+    const barSpecs = [
+      {dx:0, h:3, dy:7}, {dx:3, h:5, dy:5}, {dx:6, h:7, dy:3}, {dx:9, h:10, dy:0}
+    ];
+    barSpecs.forEach((b, i) => {
+      c.fillStyle = i < signalLevel ? fg : 'rgba(128,128,128,0.35)';
+      c.fillRect(x+b.dx, y+b.dy, 2, b.h);
+    });
+    c.strokeStyle = fg;
+    c.lineWidth = 1;
+    roundRectPath(c, x+17, y+1, 16, 8, 1);
+    c.stroke();
+    const fillW = Math.max(0, Math.min(1, batteryLevel/100)) * 10;
+    if (fillW > 0.3){
+      c.fillStyle = batteryLevel <= 15 ? '#d9463a' : fg;
+      c.fillRect(x+18.5, y+2.5, fillW, 5);
+    }
+    c.fillStyle = fg;
+    c.fillRect(x+34, y+3.5, 1.5, 3);
+    c.restore();
+  }
+
+  function render(){
+    const SCREEN_W = config.screenWidth;
+    const BODY_FIXED_H = config.bodyHeight;
+    const bounds = getScreenBounds();
+
+    const activePage = config.pages[config.currentPage] || { title: "", bodyText: "" };
+    const pageString = `(${config.currentPage + 1}/${config.pages.length})`;
+
+    const statusBg = shade(config.bg, 0.15);
+    const statusBorder = shade(config.bg, 0.35);
+    const softBg = shade(config.bg, 0.22);
+    const softBorder = shade(config.bg, 0.40);
+
+    ctx.font = `${BODY_FONT_SIZE}px ${config.fontStack}`;
+    
+    // Вычисляем строки и высоту текста
+    const lines = wrapText(ctx, activePage.bodyText, SCREEN_W - BODY_PAD_X*2);
+    const textH = lines.length * BODY_LINE_HEIGHT;
+    
+    // Рассчитываем максимальный скролл
+    const visibleTextHeight = BODY_FIXED_H - BODY_PAD_TOP - BODY_PAD_BOTTOM;
+    maxScrollY = Math.max(0, textH - visibleTextHeight);
+    textScrollY = Math.max(0, Math.min(textScrollY, maxScrollY));
+
+    const bezelW = SCREEN_W + BEZEL_PAD*2;
+    const bezelH = BEZEL_PAD*2 + bounds.totalH;
+    const totalW = bezelW + config.margin*2;
+    const totalH = bezelH + config.margin*2;
+
+    canvas.width = totalW * RENDER_SCALE;
+    canvas.height = totalH * RENDER_SCALE;
+    canvas.style.width = totalW + 'px';
+    canvas.style.height = totalH + 'px';
+    ctx.setTransform(RENDER_SCALE, 0, 0, RENDER_SCALE, 0, 0);
+    ctx.clearRect(0, 0, totalW, totalH);
+
+    const bx = config.margin, by = config.margin;
+
+    if (config.shadow){
+      ctx.save();
+      ctx.shadowColor = 'rgba(0,0,0,0.55)';
+      ctx.shadowBlur = 34;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 18;
+      ctx.fillStyle = '#0b0c0e';
+      roundRectPath(ctx, bx, by, bezelW, bezelH, BEZEL_RADIUS);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // Рамка телефона
+    ctx.save();
+    ctx.fillStyle = '#0b0c0e';
+    roundRectPath(ctx, bx, by, bezelW, bezelH, BEZEL_RADIUS);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+    ctx.lineWidth = 1;
+    roundRectPath(ctx, bx+0.5, by+0.5, bezelW-1, bezelH-1, BEZEL_RADIUS);
+    ctx.stroke();
+    ctx.restore();
+
+    const sx = bx + BEZEL_PAD, sy = by + BEZEL_PAD;
+    let rowY = sy;
+
+    // Статус-бар
+    ctx.fillStyle = statusBg;
+    ctx.fillRect(sx, rowY, SCREEN_W, STATUS_H);
+    ctx.strokeStyle = statusBorder;
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(sx, rowY+STATUS_H-0.5); ctx.lineTo(sx+SCREEN_W, rowY+STATUS_H-0.5); ctx.stroke();
+    ctx.fillStyle = config.fg;
+    ctx.font = `9px ${config.fontStack}`;
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'left';
+    ctx.fillText(config.clock, sx+6, rowY + STATUS_H/2 + 1);
+    drawStatusIcons(ctx, sx + SCREEN_W - 6 - 36, rowY + (STATUS_H-10)/2, config.fg, config.signalLevel, config.batteryLevel);
+    rowY += STATUS_H;
+
+    // Оператор
+    ctx.fillStyle = config.bg;
+    ctx.fillRect(sx, rowY, SCREEN_W, CARRIER_H);
+    ctx.fillStyle = config.fg;
+    ctx.font = `bold 10px ${config.fontStack}`;
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(config.carrier, sx+6, rowY + CARRIER_H/2 + 1);
+    rowY += CARRIER_H;
+
+    // Заголовок
+    ctx.fillStyle = config.titleBg;
+    ctx.fillRect(sx, rowY, SCREEN_W, TITLE_H);
+    const badgeX = sx+7, badgeY = rowY + (TITLE_H-16)/2, badgeW = 18, badgeH = 16;
+    ctx.fillStyle = config.titleFg;
+    roundRectPath(ctx, badgeX, badgeY, badgeW, badgeH, 2);
+    ctx.fill();
+    ctx.fillStyle = config.titleBg;
+    ctx.font = `bold 10px ${config.fontStack}`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('B', badgeX+badgeW/2, badgeY+badgeH/2+1);
+
+    ctx.font = `bold 12px ${config.fontStack}`;
+    ctx.textAlign = 'right';
+    ctx.fillStyle = config.titleFg;
+    const pageX = sx + SCREEN_W - 7;
+    ctx.font = `10px ${config.fontStack}`;
+    ctx.globalAlpha = 0.85;
+    ctx.fillText(pageString, pageX, rowY + TITLE_H/2 + 1);
+    ctx.globalAlpha = 1;
+    const pageW = ctx.measureText(pageString).width;
+
+    ctx.font = `bold 12px ${config.fontStack}`;
+    ctx.textAlign = 'left';
+    const titleX = badgeX + badgeW + 6;
+    const titleMaxW = (pageX - pageW - 8) - titleX;
+    const titleShown = truncateToWidth(ctx, activePage.title, Math.max(10, titleMaxW));
+    ctx.fillText(titleShown, titleX, rowY + TITLE_H/2 + 1);
+    rowY += TITLE_H;
+
+    // Отрисовка тела экрана с обрезкой
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(sx, rowY, SCREEN_W, BODY_FIXED_H);
+    ctx.clip(); 
+
+    ctx.fillStyle = config.bg;
+    ctx.fillRect(sx, rowY, SCREEN_W, BODY_FIXED_H);
+    
+    ctx.fillStyle = config.fg;
+    ctx.font = `${BODY_FONT_SIZE}px ${config.fontStack}`;
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'alphabetic';
+    
+    let ly = rowY + BODY_PAD_TOP + BODY_FONT_SIZE - textScrollY;
+    
+    for (const line of lines){
+      if (ly > rowY - BODY_LINE_HEIGHT && ly < rowY + BODY_FIXED_H + BODY_LINE_HEIGHT) {
+        ctx.fillText(line, sx + BODY_PAD_X, ly);
+      }
+      ly += BODY_LINE_HEIGHT;
+    }
+    
+    ctx.restore(); 
+
+    rowY += BODY_FIXED_H;
+
+    // Софт-клавиши
+    ctx.fillStyle = softBg;
+    ctx.fillRect(sx, rowY, SCREEN_W, SOFT_H);
+    ctx.strokeStyle = softBorder;
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(sx, rowY+0.5); ctx.lineTo(sx+SCREEN_W, rowY+0.5); ctx.stroke();
+
+    ctx.font = `9.5px ${config.fontStack}`;
+    ctx.textBaseline = 'middle';
+    const keyY = rowY + SOFT_H/2;
+    
+    ctx.fillStyle = config.fg;
+    roundRectPath(ctx, sx+6, keyY-5.5, 11, 11, 2);
+    ctx.fill();
+    ctx.fillStyle = config.bg;
+    ctx.font = `8px ${config.fontStack}`;
+    ctx.textAlign = 'center';
+    ctx.fillText('◀', sx+6+5.5, keyY+1);
+    ctx.fillStyle = config.fg;
+    ctx.font = `9.5px ${config.fontStack}`;
+    ctx.textAlign = 'left';
+    ctx.fillText(config.softLeft, sx+6+11+3, keyY+1);
+    
+    ctx.textAlign = 'center';
+    ctx.fillText(config.softRight, sx+SCREEN_W/2, keyY+1);
+    
+    ctx.fillStyle = config.fg;
+    roundRectPath(ctx, sx+SCREEN_W-6-11, keyY-5.5, 11, 11, 2);
+    ctx.fill();
+    ctx.fillStyle = config.bg;
+    ctx.font = `8px ${config.fontStack}`;
+    ctx.textAlign = 'center';
+    ctx.fillText('▶', sx+SCREEN_W-6-5.5, keyY+1);
+
+    // Эффект LCD
+    if (config.lcdEffect){
+      ctx.save();
+      ctx.translate(sx, sy);
+      paintLcdEffect(ctx, SCREEN_W, bounds.totalH, config.lcdIntensity);
+      ctx.restore();
+    }
+  }
+
+  // =================================================================
+  // ОБРАБОТЧИКИ СОБЫТИЙ
+  // =================================================================
+
+  const scrollStep = 23; 
+
+  function getMousePos(canvas, evt) {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = (canvas.width / RENDER_SCALE) / rect.width;
+    const scaleY = (canvas.height / RENDER_SCALE) / rect.height;
+    return {
+      x: (evt.clientX - rect.left) * scaleX,
+      y: (evt.clientY - rect.top) * scaleY
+    };
+  }
+
+  canvas.addEventListener('mousemove', (e) => {
+    const pos = getMousePos(canvas, e);
+    const bounds = getScreenBounds();
+    
+    if (pos.x >= bounds.minX && pos.x <= bounds.maxX &&
+        pos.y >= bounds.minY && pos.y <= bounds.maxY) {
+      canvas.style.cursor = 'ns-resize';
+    } else {
+      canvas.style.cursor = 'default';
+    }
+  });
+
+  canvas.addEventListener('wheel', (e) => {
+    const pos = getMousePos(canvas, e);
+    const bounds = getScreenBounds();
+    
+    if (pos.x >= bounds.minX && pos.x <= bounds.maxX &&
+        pos.y >= bounds.minY && pos.y <= bounds.maxY) {
+      
+      e.preventDefault();
+      
+      if (e.deltaY > 0) {
+        textScrollY += scrollStep;
+      } else {
+        textScrollY -= scrollStep;
+      }
+      
+      textScrollY = Math.max(0, Math.min(textScrollY, maxScrollY));
+      render(); 
+    }
+  }, { passive: false });
+
+  // Кнопки скролла
+  document.getElementById('btnUp').addEventListener('click', () => {
+    textScrollY -= scrollStep * 3; 
+    textScrollY = Math.max(0, Math.min(textScrollY, maxScrollY));
+    render();
+  });
+
+  document.getElementById('btnDown').addEventListener('click', () => {
+    textScrollY += scrollStep * 3; 
+    textScrollY = Math.max(0, Math.min(textScrollY, maxScrollY));
+    render();
+  });
+
+  // Кнопки переключения страниц
+  document.getElementById('btnPrev').addEventListener('click', () => {
+    if (config.currentPage > 0) {
+      config.currentPage--;
+      textScrollY = 0; // Сброс скролла наверх при смене страницы
+      render();
+    }
+  });
+
+  document.getElementById('btnNext').addEventListener('click', () => {
+    if (config.currentPage < config.pages.length - 1) {
+      config.currentPage++;
+      textScrollY = 0; // Сброс скролла наверх при смене страницы
+      render();
+    }
+  });
+
+  // Отрисовка
+  document.fonts.ready.then(() => {
+    render();
+  });
+  
+  render();
+</script>
+</body>
+</html>
