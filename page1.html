@@ -82,158 +82,6 @@
             max-width: 100%;
             height: auto;
             display: block;
-            box-shadow: none;
-            border: none;
-        }
-
-        /* ПАНЕЛЬ УПРАВЛЕНИЯ */
-        .control-panel {
-            position: fixed;
-            right: 0;
-            top: 0;
-            width: 380px;
-            height: 100vh;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border-left: 2px solid #0f3460;
-            overflow-y: auto;
-            z-index: 1000;
-            padding: 20px;
-            color: #eee;
-            font-size: 13px;
-        }
-
-        .control-panel::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .control-panel::-webkit-scrollbar-track {
-            background: #16213e;
-        }
-
-        .control-panel::-webkit-scrollbar-thumb {
-            background: #0f3460;
-            border-radius: 4px;
-        }
-
-        .control-panel::-webkit-scrollbar-thumb:hover {
-            background: #1a5f7a;
-        }
-
-        .panel-title {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #00d4ff;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #0f3460;
-        }
-
-        .element-group {
-            background: #0f1419;
-            border: 1px solid #0f3460;
-            border-radius: 6px;
-            padding: 12px;
-            margin-bottom: 12px;
-        }
-
-        .element-name {
-            color: #00d4ff;
-            font-weight: bold;
-            margin-bottom: 8px;
-            font-size: 12px;
-        }
-
-        .control-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-bottom: 8px;
-        }
-
-        .control-input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-        }
-
-        .control-input-group label {
-            font-size: 11px;
-            color: #aaa;
-            text-transform: uppercase;
-        }
-
-        .control-input-group input[type="range"] {
-            width: 100%;
-            height: 5px;
-            border-radius: 3px;
-            background: #1a3a4a;
-            outline: none;
-            -webkit-appearance: none;
-        }
-
-        .control-input-group input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: #00d4ff;
-            cursor: pointer;
-            box-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
-        }
-
-        .control-input-group input[type="range"]::-moz-range-thumb {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: #00d4ff;
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
-        }
-
-        .control-input-group input[type="number"] {
-            background: #1a3a4a;
-            border: 1px solid #0f3460;
-            color: #00d4ff;
-            padding: 4px 6px;
-            border-radius: 3px;
-            font-size: 11px;
-            font-weight: bold;
-        }
-
-        .control-input-group input[type="number"]:focus {
-            outline: none;
-            border-color: #00d4ff;
-            box-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
-        }
-
-        .export-button {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
-            border: none;
-            border-radius: 6px;
-            color: #000;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 15px;
-            font-size: 12px;
-            text-transform: uppercase;
-            transition: all 0.3s;
-        }
-
-        .export-button:hover {
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
-            transform: scale(1.02);
-        }
-
-        .export-button:active {
-            transform: scale(0.98);
-        }
-
-        .stage {
-            margin-right: 400px;
         }
 
         /* КНОПКИ ТЕЛЕФОНА */
@@ -482,36 +330,112 @@
         }
 
         /* КОНТРОЛЫ */
+        /* ПАНЕЛЬ НАСТРОЕК */
         .controls-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            margin-top: 20px;
+            max-width: 1200px;
+            background: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            color: #f4f6ff;
             z-index: 10;
         }
 
-        .scroll-controls {
-            display: flex;
-            gap: 12px;
+        .controls-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #ffb841;
         }
 
-        .scroll-btn {
+        .elements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .element-control {
+            background: #252525;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 15px;
+        }
+
+        .element-name {
+            font-weight: bold;
+            color: #ffb841;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .control-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        .control-label {
+            width: 50px;
+            color: #aaa;
+        }
+
+        .control-input {
+            flex: 1;
+            padding: 6px;
+            background: #1a1a1a;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .control-value {
+            width: 50px;
+            text-align: right;
+            color: #ffb841;
+            font-weight: bold;
+        }
+
+        .control-slider {
+            width: 100%;
+            height: 5px;
+        }
+
+        .export-btn {
             background: #2b4066;
             color: #f4f6ff;
             border: 1px solid #1a2740;
-            padding: 10px 18px;
+            padding: 12px 24px;
             border-radius: 6px;
             font-family: 'DotGothic16', sans-serif;
             font-size: 14px;
             cursor: pointer;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             transition: background 0.2s, transform 0.1s;
+            margin-right: 10px;
         }
 
-        .scroll-btn:hover { background: #3c5685; }
-        .scroll-btn:active { transform: translateY(2px); box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
-        .scroll-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .export-btn:hover { background: #3c5685; }
+        .export-btn:active { transform: translateY(2px); box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+
+        .export-code {
+            background: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            padding: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-size: 11px;
+            color: #0f0;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-top: 15px;
+        }
 
         /* Навигация */
         .navigation {
@@ -570,68 +494,24 @@
         <div class="phone-button btn-12" id="btnHash"></div>
     </div>
 
-    <!-- Контролы -->
+    <!-- ПАНЕЛЬ НАСТРОЕК -->
     <div class="controls-wrapper">
-        <!-- Кнопки переключения страниц -->
-        <div class="scroll-controls">
-            <button class="scroll-btn" id="btnPrev">◄ Влево</button>
-            <button class="scroll-btn" id="btnNext">Вправо ►</button>
+        <div class="controls-title">⚙️ Настройка расположения и размера элементов телефона</div>
+        
+        <div class="elements-grid" id="controlsGrid"></div>
+
+        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+            <button class="export-btn" onclick="exportCSS()">📋 Экспортировать CSS</button>
+            <button class="export-btn" onclick="resetToDefaults()" style="background: #66402b;">↻ Сбросить</button>
         </div>
 
-        <!-- Кнопки управления прокруткой текста -->
-        <div class="scroll-controls">
-            <button class="scroll-btn" id="btnUp">▲ Вверх</button>
-            <button class="scroll-btn" id="btnDown">▼ Вниз</button>
-        </div>
+        <div class="export-code" id="exportOutput" style="display: none;"></div>
     </div>
 
     <!-- Навигация -->
     <div class="navigation">
         <a href="index.html" class="back">← Вернуться на главную</a>
     </div>
-</div>
-
-<!-- ПАНЕЛЬ УПРАВЛЕНИЯ -->
-<div class="control-panel" id="controlPanel">
-    <div class="panel-title">⚙️ Настройка телефона</div>
-    
-    <!-- Корпус телефона -->
-    <div class="element-group">
-        <div class="element-name">📱 Корпус телефона</div>
-        <div class="control-row">
-            <div class="control-input-group">
-                <label>X позиция</label>
-                <input type="range" id="phone-x" min="-200" max="500" value="0" step="1">
-                <input type="number" id="phone-x-input" min="-200" max="500" value="0">
-            </div>
-            <div class="control-input-group">
-                <label>Y позиция</label>
-                <input type="range" id="phone-y" min="-200" max="500" value="0" step="1">
-                <input type="number" id="phone-y-input" min="-200" max="500" value="0">
-            </div>
-        </div>
-        <div class="control-row">
-            <div class="control-input-group">
-                <label>Ширина</label>
-                <input type="range" id="phone-width" min="150" max="600" value="280" step="1">
-                <input type="number" id="phone-width-input" min="150" max="600" value="280">
-            </div>
-            <div class="control-input-group">
-                <label>Высота</label>
-                <input type="range" id="phone-height" min="300" max="800" value="520" step="1">
-                <input type="number" id="phone-height-input" min="300" max="800" value="520">
-            </div>
-        </div>
-    </div>
-
-    <!-- Навигационные кнопки -->
-    <div id="navButtonsPanel"></div>
-
-    <!-- Цифровые кнопки -->
-    <div id="numButtonsPanel"></div>
-
-    <!-- Кнопка экспорта -->
-    <button class="export-button" id="exportBtn">📋 Экспортировать CSS</button>
 </div>
 
 <script>
@@ -858,17 +738,6 @@
       ctx.restore();
     }
 
-    // Рамка телефона
-    ctx.save();
-    ctx.fillStyle = '#0b0c0e';
-    roundRectPath(ctx, bx, by, bezelW, bezelH, BEZEL_RADIUS);
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(255,255,255,0.06)';
-    ctx.lineWidth = 1;
-    roundRectPath(ctx, bx+0.5, by+0.5, bezelW-1, bezelH-1, BEZEL_RADIUS);
-    ctx.stroke();
-    ctx.restore();
-
     const sx = bx + BEZEL_PAD, sy = by + BEZEL_PAD;
     let rowY = sy;
 
@@ -1074,36 +943,6 @@
     }
   });
 
-  // Кнопки скролла (из контролов)
-  document.getElementById('btnUp').addEventListener('click', () => {
-    textScrollY -= scrollStep * 3; 
-    textScrollY = Math.max(0, Math.min(textScrollY, maxScrollY));
-    render();
-  });
-
-  document.getElementById('btnDown').addEventListener('click', () => {
-    textScrollY += scrollStep * 3; 
-    textScrollY = Math.max(0, Math.min(textScrollY, maxScrollY));
-    render();
-  });
-
-  // Кнопки переключения страниц (из контролов)
-  document.getElementById('btnPrev').addEventListener('click', () => {
-    if (config.currentPage > 0) {
-      config.currentPage--;
-      textScrollY = 0;
-      render();
-    }
-  });
-
-  document.getElementById('btnNext').addEventListener('click', () => {
-    if (config.currentPage < config.pages.length - 1) {
-      config.currentPage++;
-      textScrollY = 0;
-      render();
-    }
-  });
-
   // Обработчики для цифровых кнопок (просто для отзывчивости)
   ['btn1', 'btn2', 'btn3', 'btn4', 'btn5', 'btn6', 'btn7', 'btn8', 'btn9', 'btnStar', 'btn0', 'btnHash'].forEach(id => {
     const btn = document.getElementById(id);
@@ -1119,289 +958,174 @@
   });
 
   // =================================================================
-  // СИСТЕМА УПРАВЛЕНИЯ ПАНЕЛЬЮ
+  // СИСТЕМА НАСТРОЕК ЭЛЕМЕНТОВ
   // =================================================================
 
-  // Определяем все элементы для управления
-  const buttonElements = [
-    // Навигационные кнопки
-    { id: 'btnNavUp', name: '⬆️ Вверх', selector: '.btn-up' },
-    { id: 'btnNavDown', name: '⬇️ Вниз', selector: '.btn-down' },
-    { id: 'btnNavLeft', name: '⬅️ Влево', selector: '.btn-left' },
-    { id: 'btnNavRight', name: '➡️ Вправо', selector: '.btn-right' },
-    { id: 'btnCenter', name: '⭕ Центр', selector: '.btn-center' },
-    // Цифровые кнопки
-    { id: 'btn1', name: '1️⃣ Кнопка 1', selector: '.btn-1' },
-    { id: 'btn2', name: '2️⃣ Кнопка 2', selector: '.btn-2' },
-    { id: 'btn3', name: '3️⃣ Кнопка 3', selector: '.btn-3' },
-    { id: 'btn4', name: '4️⃣ Кнопка 4', selector: '.btn-4' },
-    { id: 'btn5', name: '5️⃣ Кнопка 5', selector: '.btn-5' },
-    { id: 'btn6', name: '6️⃣ Кнопка 6', selector: '.btn-6' },
-    { id: 'btn7', name: '7️⃣ Кнопка 7', selector: '.btn-7' },
-    { id: 'btn8', name: '8️⃣ Кнопка 8', selector: '.btn-8' },
-    { id: 'btn9', name: '9️⃣ Кнопка 9', selector: '.btn-9' },
-    { id: 'btnStar', name: '⭐ Звёздочка (*)', selector: '.btn-10' },
-    { id: 'btn0', name: '0️⃣ Кнопка 0', selector: '.btn-11' },
-    { id: 'btnHash', name: '#️⃣ Решётка (#)', selector: '.btn-12' },
-  ];
-
-  // Начальные значения кнопок (в px)
-  const buttonValues = {
-    'btnNavUp': { x: 120, y: 210, w: 50, h: 50 },
-    'btnNavDown': { x: 120, y: 310, w: 50, h: 50 },
-    'btnNavLeft': { x: 35, y: 260, w: 50, h: 50 },
-    'btnNavRight': { x: 210, y: 260, w: 50, h: 50 },
-    'btnCenter': { x: 110, y: 255, w: 70, h: 70 },
-    'btn1': { x: 20, y: 320, w: 40, h: 40 },
-    'btn2': { x: 120, y: 320, w: 40, h: 40 },
-    'btn3': { x: 220, y: 320, w: 40, h: 40 },
-    'btn4': { x: 20, y: 380, w: 40, h: 40 },
-    'btn5': { x: 120, y: 380, w: 40, h: 40 },
-    'btn6': { x: 220, y: 380, w: 40, h: 40 },
-    'btn7': { x: 20, y: 440, w: 40, h: 40 },
-    'btn8': { x: 120, y: 440, w: 40, h: 40 },
-    'btn9': { x: 220, y: 440, w: 40, h: 40 },
-    'btnStar': { x: 20, y: 500, w: 40, h: 40 },
-    'btn0': { x: 120, y: 500, w: 40, h: 40 },
-    'btnHash': { x: 220, y: 500, w: 40, h: 40 },
+  // Определение всех элементов для настройки
+  const elementsConfig = {
+    'phoneBody': { name: 'Корпус телефона', el: '#phoneBody', defaults: { x: 0, y: 0, scale: 1 }, varPrefix: '--phone' },
+    'btn-up': { name: '🔼 Кнопка Вверх', el: '.btn-up', defaults: { x: 120, y: 210, scale: 1 }, varPrefix: '--btn' },
+    'btn-down': { name: '🔽 Кнопка Вниз', el: '.btn-down', defaults: { x: 120, y: 310, scale: 1 }, varPrefix: '--btn' },
+    'btn-left': { name: '◀ Кнопка Влево', el: '.btn-left', defaults: { x: 35, y: 260, scale: 1 }, varPrefix: '--btn' },
+    'btn-right': { name: '▶ Кнопка Вправо', el: '.btn-right', defaults: { x: 210, y: 260, scale: 1 }, varPrefix: '--btn' },
+    'btn-center': { name: '⭕ Центр', el: '.btn-center', defaults: { x: 110, y: 255, scale: 1 }, varPrefix: '--btn' },
+    'btn-1': { name: '1️⃣ Кнопка 1', el: '.btn-1', defaults: { x: 20, y: 320, scale: 1 }, varPrefix: '--btn' },
+    'btn-2': { name: '2️⃣ Кнопка 2', el: '.btn-2', defaults: { x: 120, y: 320, scale: 1 }, varPrefix: '--btn' },
+    'btn-3': { name: '3️⃣ Кнопка 3', el: '.btn-3', defaults: { x: 220, y: 320, scale: 1 }, varPrefix: '--btn' },
+    'btn-4': { name: '4️⃣ Кнопка 4', el: '.btn-4', defaults: { x: 20, y: 380, scale: 1 }, varPrefix: '--btn' },
+    'btn-5': { name: '5️⃣ Кнопка 5', el: '.btn-5', defaults: { x: 120, y: 380, scale: 1 }, varPrefix: '--btn' },
+    'btn-6': { name: '6️⃣ Кнопка 6', el: '.btn-6', defaults: { x: 220, y: 380, scale: 1 }, varPrefix: '--btn' },
+    'btn-7': { name: '7️⃣ Кнопка 7', el: '.btn-7', defaults: { x: 20, y: 440, scale: 1 }, varPrefix: '--btn' },
+    'btn-8': { name: '8️⃣ Кнопка 8', el: '.btn-8', defaults: { x: 120, y: 440, scale: 1 }, varPrefix: '--btn' },
+    'btn-9': { name: '9️⃣ Кнопка 9', el: '.btn-9', defaults: { x: 220, y: 440, scale: 1 }, varPrefix: '--btn' },
+    'btn-star': { name: '⭐ Кнопка *', el: '.btn-10', defaults: { x: 20, y: 500, scale: 1 }, varPrefix: '--btn' },
+    'btn-0': { name: '0️⃣ Кнопка 0', el: '.btn-11', defaults: { x: 120, y: 500, scale: 1 }, varPrefix: '--btn' },
+    'btn-hash': { name: '#️⃣ Кнопка #', el: '.btn-12', defaults: { x: 220, y: 500, scale: 1 }, varPrefix: '--btn' }
   };
 
-  // Функция создания UI элементов управления
-  function createControlPanel() {
-    const style = document.createElement('style');
-    style.textContent = `
-      .btn-label { font-weight: bold; color: #00d4ff; margin-bottom: 6px; }
-    `;
-    document.head.appendChild(style);
+  // Хранилище текущих значений
+  const elementValues = {};
 
-    // Панель навигационных кнопок
-    const navPanel = document.getElementById('navButtonsPanel');
-    const navTitle = document.createElement('div');
-    navTitle.className = 'panel-title';
-    navTitle.textContent = '🎮 Навигационные кнопки';
-    navPanel.appendChild(navTitle);
-
-    buttonElements.slice(0, 5).forEach(btn => {
-      navPanel.appendChild(createButtonGroup(btn));
-    });
-
-    // Панель цифровых кнопок
-    const numPanel = document.getElementById('numButtonsPanel');
-    const numTitle = document.createElement('div');
-    numTitle.className = 'panel-title';
-    numTitle.style.marginTop = '15px';
-    numTitle.textContent = '🔢 Цифровые кнопки';
-    numPanel.appendChild(numTitle);
-
-    buttonElements.slice(5).forEach(btn => {
-      numPanel.appendChild(createButtonGroup(btn));
-    });
-  }
-
-  function createButtonGroup(btn) {
-    const group = document.createElement('div');
-    group.className = 'element-group';
-    
-    const name = document.createElement('div');
-    name.className = 'element-name';
-    name.textContent = btn.name;
-    group.appendChild(name);
-
-    const row = document.createElement('div');
-    row.className = 'control-row';
-    
-    // X позиция
-    row.appendChild(createControl(
-      `${btn.id}-x`, 
-      'X позиция', 
-      buttonValues[btn.id].x, 
-      -100, 
-      400, 
-      btn.id, 
-      'x'
-    ));
-
-    // Y позиция
-    row.appendChild(createControl(
-      `${btn.id}-y`, 
-      'Y позиция', 
-      buttonValues[btn.id].y, 
-      -100, 
-      600, 
-      btn.id, 
-      'y'
-    ));
-
-    group.appendChild(row);
-
-    const row2 = document.createElement('div');
-    row2.className = 'control-row';
-
-    // Ширина
-    row2.appendChild(createControl(
-      `${btn.id}-w`, 
-      'Ширина', 
-      buttonValues[btn.id].w, 
-      20, 
-      150, 
-      btn.id, 
-      'w'
-    ));
-
-    // Высота
-    row2.appendChild(createControl(
-      `${btn.id}-h`, 
-      'Высота', 
-      buttonValues[btn.id].h, 
-      20, 
-      150, 
-      btn.id, 
-      'h'
-    ));
-
-    group.appendChild(row2);
-
-    return group;
-  }
-
-  function createControl(id, label, value, min, max, btnId, param) {
-    const container = document.createElement('div');
-    container.className = 'control-input-group';
-
-    const labelEl = document.createElement('label');
-    labelEl.textContent = label;
-    container.appendChild(labelEl);
-
-    const slider = document.createElement('input');
-    slider.type = 'range';
-    slider.id = id;
-    slider.min = min;
-    slider.max = max;
-    slider.value = value;
-    slider.step = '1';
-    container.appendChild(slider);
-
-    const input = document.createElement('input');
-    input.type = 'number';
-    input.id = id + '-input';
-    input.min = min;
-    input.max = max;
-    input.value = value;
-    container.appendChild(input);
-
-    // События синхронизации
-    slider.addEventListener('input', () => {
-      input.value = slider.value;
-      updateButtonStyle(btnId, param, slider.value);
-    });
-
-    input.addEventListener('change', () => {
-      slider.value = input.value;
-      updateButtonStyle(btnId, param, input.value);
-    });
-
-    return container;
-  }
-
-  function updateButtonStyle(btnId, param, value) {
-    const element = document.getElementById(btnId);
-    if (!element) return;
-
-    buttonValues[btnId][param] = parseInt(value);
-
-    if (param === 'x') {
-      element.style.setProperty('--btn-x', value + 'px');
-    } else if (param === 'y') {
-      element.style.setProperty('--btn-y', value + 'px');
-    } else if (param === 'w') {
-      element.style.setProperty('--btn-w', value + 'px');
-    } else if (param === 'h') {
-      element.style.setProperty('--btn-h', value + 'px');
-    }
-  }
-
-  // События для корпуса телефона
-  ['phone-x', 'phone-y', 'phone-width', 'phone-height'].forEach(id => {
-    const range = document.getElementById(id);
-    const input = document.getElementById(id + '-input');
-
-    if (range && input) {
-      range.addEventListener('input', () => {
-        input.value = range.value;
-        updatePhoneStyle(id.replace('phone-', ''), range.value);
-      });
-
-      input.addEventListener('change', () => {
-        range.value = input.value;
-        updatePhoneStyle(id.replace('phone-', ''), input.value);
-      });
-    }
+  // Инициализация значений
+  Object.keys(elementsConfig).forEach(key => {
+    elementValues[key] = { ...elementsConfig[key].defaults };
   });
 
-  function updatePhoneStyle(param, value) {
-    const phoneBody = document.getElementById('phoneBody');
-    if (!phoneBody) return;
+  // Создание UI панели
+  function initControls() {
+    const grid = document.getElementById('controlsGrid');
+    grid.innerHTML = '';
 
-    if (param === 'x') {
-      phoneBody.style.setProperty('--phone-x', value + 'px');
-    } else if (param === 'y') {
-      phoneBody.style.setProperty('--phone-y', value + 'px');
-    } else if (param === 'width') {
-      phoneBody.style.setProperty('--phone-width', value + 'px');
-    } else if (param === 'height') {
-      phoneBody.style.setProperty('--phone-height', value + 'px');
+    Object.entries(elementsConfig).forEach(([key, config]) => {
+      const div = document.createElement('div');
+      div.className = 'element-control';
+      
+      const values = elementValues[key];
+
+      div.innerHTML = `
+        <div class="element-name">${config.name}</div>
+        
+        <div class="control-row">
+          <label class="control-label">X:</label>
+          <input type="range" class="control-slider" min="-500" max="500" step="1" value="${values.x}" data-key="${key}" data-prop="x">
+          <input type="number" class="control-input" min="-500" max="500" step="1" value="${values.x}" data-key="${key}" data-prop="x">
+          <span class="control-value">${values.x}px</span>
+        </div>
+
+        <div class="control-row">
+          <label class="control-label">Y:</label>
+          <input type="range" class="control-slider" min="-500" max="500" step="1" value="${values.y}" data-key="${key}" data-prop="y">
+          <input type="number" class="control-input" min="-500" max="500" step="1" value="${values.y}" data-key="${key}" data-prop="y">
+          <span class="control-value">${values.y}px</span>
+        </div>
+
+        <div class="control-row">
+          <label class="control-label">S:</label>
+          <input type="range" class="control-slider" min="0.1" max="3" step="0.1" value="${values.scale}" data-key="${key}" data-prop="scale">
+          <input type="number" class="control-input" min="0.1" max="3" step="0.1" value="${values.scale}" data-key="${key}" data-prop="scale">
+          <span class="control-value">${values.scale.toFixed(1)}x</span>
+        </div>
+      `;
+
+      grid.appendChild(div);
+    });
+
+    // Привязка событий
+    document.querySelectorAll('[data-key][data-prop]').forEach(input => {
+      input.addEventListener('input', (e) => {
+        const key = e.target.dataset.key;
+        const prop = e.target.dataset.prop;
+        const value = prop === 'scale' ? parseFloat(e.target.value) : parseInt(e.target.value);
+
+        elementValues[key][prop] = value;
+        updateAllInputs(key, prop, value);
+        updateElement(key);
+      });
+    });
+  }
+
+  function updateAllInputs(key, prop, value) {
+    const displayValue = prop === 'scale' ? value.toFixed(1) : value;
+    const unit = prop === 'scale' ? 'x' : 'px';
+
+    document.querySelectorAll(`[data-key="${key}"][data-prop="${prop}"]`).forEach(input => {
+      if (input.type === 'range' || input.type === 'number') {
+        input.value = value;
+      }
+    });
+
+    // Обновляем дисплей значения
+    document.querySelectorAll(`[data-key="${key}"]`).forEach(input => {
+      if (input.nextElementSibling && input.nextElementSibling.classList.contains('control-value')) {
+        if (input.dataset.prop === prop) {
+          input.nextElementSibling.textContent = displayValue + unit;
+        }
+      }
+    });
+  }
+
+  function updateElement(key) {
+    const config = elementsConfig[key];
+    const values = elementValues[key];
+    const el = document.querySelector(config.el);
+
+    if (el) {
+      const root = key === 'phoneBody' ? document.documentElement : el;
+      root.style.setProperty(`${config.varPrefix}-x`, `${values.x}px`);
+      root.style.setProperty(`${config.varPrefix}-y`, `${values.y}px`);
+      root.style.setProperty(`${config.varPrefix}-width`, `${280 * values.scale}px`);
+      root.style.setProperty(`${config.varPrefix}-height`, `${520 * values.scale}px`);
+      root.style.setProperty(`${config.varPrefix}-w`, `${40 * values.scale}px`);
+      root.style.setProperty(`${config.varPrefix}-h`, `${40 * values.scale}px`);
     }
   }
 
-  // Функция экспорта CSS
   function exportCSS() {
-    let css = `/* КОРПУС ТЕЛЕФОНА */
-.phone-body {
-    --phone-x: ${document.getElementById('phone-x').value}px;
-    --phone-y: ${document.getElementById('phone-y').value}px;
-    --phone-width: ${document.getElementById('phone-width').value}px;
-    --phone-height: ${document.getElementById('phone-height').value}px;
-}
+    let css = `/* Вставьте этот код в <style> тег вашего HTML файла */\n\n`;
 
-/* КНОПКИ */
-`;
-
-    buttonElements.forEach(btn => {
-      const vals = buttonValues[btn.id];
-      css += `\n/* ${btn.name} */
-.${btn.selector.substring(1)} {
-    --btn-x: ${vals.x}px;
-    --btn-y: ${vals.y}px;
-    --btn-w: ${vals.w}px;
-    --btn-h: ${vals.h}px;
-}
-`;
+    Object.entries(elementsConfig).forEach(([key, config]) => {
+      const values = elementValues[key];
+      
+      if (key === 'phoneBody') {
+        css += `.phone-body {\n`;
+        css += `    --phone-x: ${values.x}px;\n`;
+        css += `    --phone-y: ${values.y}px;\n`;
+        css += `    --phone-width: ${280 * values.scale}px;\n`;
+        css += `    --phone-height: ${520 * values.scale}px;\n`;
+        css += `}\n\n`;
+      } else {
+        const classList = config.el.substring(1); // Убрать точку
+        css += `.${classList} {\n`;
+        css += `    --btn-x: ${values.x}px;\n`;
+        css += `    --btn-y: ${values.y}px;\n`;
+        css += `    --btn-w: ${40 * values.scale}px;\n`;
+        css += `    --btn-h: ${40 * values.scale}px;\n`;
+        css += `}\n\n`;
+      }
     });
 
-    return css;
+    const output = document.getElementById('exportOutput');
+    output.textContent = css;
+    output.style.display = 'block';
+    
+    // Автоматическая селекция текста
+    const range = document.createRange();
+    range.selectNodeContents(output);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
   }
 
-  // Обработчик кнопки экспорта
-  document.getElementById('exportBtn').addEventListener('click', () => {
-    const css = exportCSS();
-    
-    // Копируем в буфер обмена
-    navigator.clipboard.writeText(css).then(() => {
-      const btn = document.getElementById('exportBtn');
-      const originalText = btn.textContent;
-      btn.textContent = '✅ Скопировано!';
-      setTimeout(() => {
-        btn.textContent = originalText;
-      }, 2000);
+  function resetToDefaults() {
+    Object.keys(elementsConfig).forEach(key => {
+      elementValues[key] = { ...elementsConfig[key].defaults };
+      updateElement(key);
     });
+    initControls();
+    document.getElementById('exportOutput').style.display = 'none';
+  }
 
-    // Также открываем в консоли
-    console.log('%c=== ЭКСПОРТИРОВАННЫЙ CSS ===', 'color: #00d4ff; font-size: 14px; font-weight: bold;');
-    console.log(css);
-  });
-
-  // Инициализируем панель управления
-  createControlPanel();
+  // Инициализация при загрузке
+  initControls();
 
   // Отрисовка
   document.fonts.ready.then(() => {
