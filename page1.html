@@ -381,6 +381,227 @@
         .back:hover {
             text-decoration: underline;
         }
+
+        /* ПАНЕЛЬ НАСТРОЕК */
+        .settings-panel {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: #1a1a2e;
+            border-left: 2px solid #2b4066;
+            color: #f4f6ff;
+            overflow-y: auto;
+            z-index: 1000;
+            transition: right 0.3s ease;
+            font-family: 'DotGothic16', sans-serif;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .settings-panel.open {
+            right: 0;
+        }
+
+        .settings-toggle {
+            position: fixed;
+            right: 20px;
+            top: 20px;
+            width: 50px;
+            height: 50px;
+            background: #2b4066;
+            border: 2px solid #f4f6ff;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            z-index: 999;
+            transition: background 0.2s;
+        }
+
+        .settings-toggle:hover {
+            background: #3c5685;
+        }
+
+        .settings-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .settings-close {
+            background: none;
+            border: none;
+            color: #f4f6ff;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .settings-tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #2b4066;
+            flex-wrap: wrap;
+        }
+
+        .settings-tab {
+            padding: 8px 12px;
+            background: #16213e;
+            border: 1px solid #2b4066;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+            cursor: pointer;
+            color: #a0a6b8;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .settings-tab.active {
+            background: #2b4066;
+            color: #f4f6ff;
+        }
+
+        .settings-tab:hover {
+            background: #1f2f4a;
+        }
+
+        .settings-content {
+            display: none;
+        }
+
+        .settings-content.active {
+            display: block;
+        }
+
+        .element-group {
+            margin-bottom: 20px;
+            padding: 12px;
+            background: #16213e;
+            border: 1px solid #2b4066;
+            border-radius: 4px;
+        }
+
+        .element-name {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #ffb841;
+            font-size: 13px;
+        }
+
+        .control-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .control-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .control-label {
+            font-size: 11px;
+            color: #a0a6b8;
+        }
+
+        .control-input {
+            width: 100%;
+            padding: 6px;
+            background: #0f1626;
+            border: 1px solid #2b4066;
+            color: #f4f6ff;
+            border-radius: 3px;
+            font-family: 'DotGothic16', sans-serif;
+            font-size: 12px;
+        }
+
+        .control-input:focus {
+            outline: none;
+            border-color: #ffb841;
+            box-shadow: 0 0 4px rgba(255, 184, 65, 0.3);
+        }
+
+        .export-section {
+            margin-top: 20px;
+            padding: 12px;
+            background: #16213e;
+            border: 1px solid #2b4066;
+            border-radius: 4px;
+        }
+
+        .export-btn {
+            width: 100%;
+            padding: 10px;
+            background: #2b4066;
+            border: 1px solid #3c5685;
+            color: #f4f6ff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'DotGothic16', sans-serif;
+            font-size: 12px;
+            margin-bottom: 8px;
+            transition: background 0.2s;
+        }
+
+        .export-btn:hover {
+            background: #3c5685;
+        }
+
+        .export-output {
+            background: #0f1626;
+            border: 1px solid #2b4066;
+            padding: 10px;
+            border-radius: 3px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-size: 11px;
+            color: #ffb841;
+            font-family: monospace;
+            margin-top: 8px;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            width: 100%;
+            padding: 8px;
+            background: #ffb841;
+            border: none;
+            color: #0f1626;
+            border-radius: 3px;
+            cursor: pointer;
+            font-family: 'DotGothic16', sans-serif;
+            font-size: 12px;
+            margin-top: 8px;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #ffc870;
+        }
+
+        .settings-help {
+            font-size: 11px;
+            color: #a0a6b8;
+            margin-top: 10px;
+            padding: 8px;
+            background: #0f1626;
+            border-left: 2px solid #ffb841;
+            border-radius: 2px;
+        }
     </style>
 </head>
 <body>
@@ -439,7 +660,269 @@
     </div>
 </div>
 
+<!-- ПАНЕЛЬ НАСТРОЕК -->
+<button class="settings-toggle" id="settingsToggle">⚙️</button>
+
+<div class="settings-panel" id="settingsPanel">
+    <div class="settings-title">
+        <span>Настройки</span>
+        <button class="settings-close" id="settingsClose">✕</button>
+    </div>
+
+    <!-- Вкладки -->
+    <div class="settings-tabs">
+        <button class="settings-tab active" data-tab="phone">Телефон</button>
+        <button class="settings-tab" data-tab="screen">Экран</button>
+        <button class="settings-tab" data-tab="nav">Навигация</button>
+        <button class="settings-tab" data-tab="digits">Цифры</button>
+    </div>
+
+    <!-- ВКЛАДКА: Телефон -->
+    <div class="settings-content active" data-content="phone">
+        <div class="element-group">
+            <div class="element-name">Корпус телефона</div>
+            <div class="control-row">
+                <div class="control-group">
+                    <label class="control-label">X (px)</label>
+                    <input type="number" class="control-input element-input" data-element="phoneBody" data-property="x" value="0">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Y (px)</label>
+                    <input type="number" class="control-input element-input" data-element="phoneBody" data-property="y" value="0">
+                </div>
+            </div>
+            <div class="control-row">
+                <div class="control-group">
+                    <label class="control-label">Ширина (px)</label>
+                    <input type="number" class="control-input element-input" data-element="phoneBody" data-property="width" value="280">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Высота (px)</label>
+                    <input type="number" class="control-input element-input" data-element="phoneBody" data-property="height" value="520">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ВКЛАДКА: Экран -->
+    <div class="settings-content" data-content="screen">
+        <div class="element-group">
+            <div class="element-name">Позиция экрана</div>
+            <div class="control-row">
+                <div class="control-group">
+                    <label class="control-label">X от края (px)</label>
+                    <input type="number" class="control-input element-input" data-element="screenWrapper" data-property="x" value="25">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Y от края (px)</label>
+                    <input type="number" class="control-input element-input" data-element="screenWrapper" data-property="y" value="80">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ВКЛАДКА: Навигационные кнопки -->
+    <div class="settings-content" data-content="nav">
+        <div class="element-group">
+            <div class="element-name">Кнопка Вверх</div>
+            <div class="control-row">
+                <div class="control-group">
+                    <label class="control-label">X (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnNavUp" data-property="x" value="120">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Y (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnNavUp" data-property="y" value="210">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Ширина (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnNavUp" data-property="width" value="50">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Высота (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnNavUp" data-property="height" value="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="element-group">
+            <div class="element-name">Кнопка Вниз</div>
+            <div class="control-row">
+                <div class="control-group">
+                    <label class="control-label">X (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnNavDown" data-property="x" value="120">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Y (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnNavDown" data-property="y" value="310">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Ширина (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnNavDown" data-property="width" value="50">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Высота (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnNavDown" data-property="height" value="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="element-group">
+            <div class="element-name">Кнопка Влево</div>
+            <div class="control-row">
+                <div class="control-group">
+                    <label class="control-label">X (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnNavLeft" data-property="x" value="35">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Y (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnNavLeft" data-property="y" value="260">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Ширина (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnNavLeft" data-property="width" value="50">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Высота (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnNavLeft" data-property="height" value="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="element-group">
+            <div class="element-name">Кнопка Вправо</div>
+            <div class="control-row">
+                <div class="control-group">
+                    <label class="control-label">X (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnNavRight" data-property="x" value="210">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Y (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnNavRight" data-property="y" value="260">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Ширина (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnNavRight" data-property="width" value="50">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Высота (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnNavRight" data-property="height" value="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="element-group">
+            <div class="element-name">Центральная кнопка</div>
+            <div class="control-row">
+                <div class="control-group">
+                    <label class="control-label">X (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnCenter" data-property="x" value="110">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Y (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnCenter" data-property="y" value="255">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Ширина (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnCenter" data-property="width" value="70">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Высота (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnCenter" data-property="height" value="70">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ВКЛАДКА: Цифровые кнопки -->
+    <div class="settings-content" data-content="digits">
+        <div class="element-group">
+            <div class="element-name">Кнопка 1, 2, 3 (верх)</div>
+            <div class="control-row">
+                <div class="control-group">
+                    <label class="control-label">Y (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btn1" data-property="y" value="320">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Ширина (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btn1" data-property="width" value="40">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Высота (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btn1" data-property="height" value="40">
+                </div>
+            </div>
+        </div>
+
+        <div class="element-group">
+            <div class="element-name">Кнопка 4, 5, 6 (середина)</div>
+            <div class="control-row">
+                <div class="control-group">
+                    <label class="control-label">Y (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btn4" data-property="y" value="380">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Ширина (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btn4" data-property="width" value="40">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Высота (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btn4" data-property="height" value="40">
+                </div>
+            </div>
+        </div>
+
+        <div class="element-group">
+            <div class="element-name">Кнопка 7, 8, 9 (низ)</div>
+            <div class="control-row">
+                <div class="control-group">
+                    <label class="control-label">Y (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btn7" data-property="y" value="440">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Ширина (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btn7" data-property="width" value="40">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Высота (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btn7" data-property="height" value="40">
+                </div>
+            </div>
+        </div>
+
+        <div class="element-group">
+            <div class="element-name">Кнопка *, 0, # (низ)</div>
+            <div class="control-row">
+                <div class="control-group">
+                    <label class="control-label">Y (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnStar" data-property="y" value="500">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Ширина (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnStar" data-property="width" value="40">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Высота (px)</label>
+                    <input type="number" class="control-input element-input" data-element="btnStar" data-property="height" value="40">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Секция экспорта -->
+    <div class="export-section">
+        <button class="export-btn" id="exportCss">📋 Экспортировать CSS</button>
+        <button class="export-btn" id="exportJs">📋 Экспортировать JS</button>
+        <div class="export-output" id="exportOutput"></div>
+        <button class="copy-btn" id="copyBtn" style="display:none;">Копировать в буфер обмена</button>
+        <div class="settings-help">
+            💡 Совет: Отредактируйте значения здесь, а затем экспортируйте настройки, чтобы скопировать их в код.
+        </div>
+    </div>
+</div>
+
 <script>
+
   // =================================================================
   // Загрузка изображения телефона
   // =================================================================
@@ -922,6 +1405,143 @@
   document.getElementById('btnCenter').addEventListener('click', () => {
     console.log('Центральная кнопка');
   });
+
+  // =================================================================
+  // СИСТЕМА НАСТРОЕК
+  // =================================================================
+
+  // Маппинг элементов
+  const elementMap = {
+    phoneBody: { selector: '.phone-body', cssProps: { x: '--phone-x', y: '--phone-y', width: '--phone-width', height: '--phone-height' } },
+    screenWrapper: { selector: '.screen-wrapper', cssProps: { x: '--screen-x', y: '--screen-y' } },
+    btnNavUp: { selector: '.btn-up', cssProps: { x: '--btn-x', y: '--btn-y', width: '--btn-w', height: '--btn-h' } },
+    btnNavDown: { selector: '.btn-down', cssProps: { x: '--btn-x', y: '--btn-y', width: '--btn-w', height: '--btn-h' } },
+    btnNavLeft: { selector: '.btn-left', cssProps: { x: '--btn-x', y: '--btn-y', width: '--btn-w', height: '--btn-h' } },
+    btnNavRight: { selector: '.btn-right', cssProps: { x: '--btn-x', y: '--btn-y', width: '--btn-w', height: '--btn-h' } },
+    btnCenter: { selector: '.btn-center', cssProps: { x: '--btn-x', y: '--btn-y', width: '--btn-w', height: '--btn-h' } },
+    btn1: { selector: '.btn-1', cssProps: { x: '--btn-x', y: '--btn-y', width: '--btn-w', height: '--btn-h' } },
+    btn2: { selector: '.btn-2', cssProps: { x: '--btn-x', y: '--btn-y', width: '--btn-w', height: '--btn-h' } },
+    btn3: { selector: '.btn-3', cssProps: { x: '--btn-x', y: '--btn-y', width: '--btn-w', height: '--btn-h' } },
+    btn4: { selector: '.btn-4', cssProps: { x: '--btn-x', y: '--btn-y', width: '--btn-w', height: '--btn-h' } },
+    btn5: { selector: '.btn-5', cssProps: { x: '--btn-x', y: '--btn-y', width: '--btn-w', height: '--btn-h' } },
+    btn6: { selector: '.btn-6', cssProps: { x: '--btn-x', y: '--btn-y', width: '--btn-w', height: '--btn-h' } },
+    btn7: { selector: '.btn-7', cssProps: { x: '--btn-x', y: '--btn-y', width: '--btn-w', height: '--btn-h' } },
+    btn8: { selector: '.btn-8', cssProps: { x: '--btn-x', y: '--btn-y', width: '--btn-w', height: '--btn-h' } },
+    btn9: { selector: '.btn-9', cssProps: { x: '--btn-x', y: '--btn-y', width: '--btn-w', height: '--btn-h' } },
+    btnStar: { selector: '.btn-10', cssProps: { x: '--btn-x', y: '--btn-y', width: '--btn-w', height: '--btn-h' } },
+    btn0: { selector: '.btn-11', cssProps: { x: '--btn-x', y: '--btn-y', width: '--btn-w', height: '--btn-h' } },
+    btnHash: { selector: '.btn-12', cssProps: { x: '--btn-x', y: '--btn-y', width: '--btn-w', height: '--btn-h' } }
+  };
+
+  // Открытие/закрытие панели
+  document.getElementById('settingsToggle').addEventListener('click', () => {
+    document.getElementById('settingsPanel').classList.toggle('open');
+  });
+
+  document.getElementById('settingsClose').addEventListener('click', () => {
+    document.getElementById('settingsPanel').classList.remove('open');
+  });
+
+  // Вкладки
+  document.querySelectorAll('.settings-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const tabName = tab.getAttribute('data-tab');
+      
+      document.querySelectorAll('.settings-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.settings-content').forEach(c => c.classList.remove('active'));
+      
+      tab.classList.add('active');
+      document.querySelector(`[data-content="${tabName}"]`).classList.add('active');
+    });
+  });
+
+  // Синхронизация с CSS переменными
+  document.querySelectorAll('.element-input').forEach(input => {
+    input.addEventListener('input', (e) => {
+      const element = e.target.getAttribute('data-element');
+      const property = e.target.getAttribute('data-property');
+      const value = e.target.value;
+      
+      const config = elementMap[element];
+      if (config) {
+        const cssVar = config.cssProps[property];
+        const selector = config.selector;
+        const el = document.querySelector(selector);
+        
+        if (el && cssVar) {
+          const unit = property === 'x' || property === 'y' ? 'px' : 'px';
+          el.style.setProperty(cssVar, `${value}${unit}`);
+        }
+      }
+    });
+  });
+
+  // Экспорт CSS
+  document.getElementById('exportCss').addEventListener('click', () => {
+    let css = '';
+    
+    Object.keys(elementMap).forEach(elementName => {
+      const config = elementMap[elementName];
+      const selector = config.selector;
+      const el = document.querySelector(selector);
+      
+      if (el) {
+        css += `\n${selector} {\n`;
+        Object.entries(config.cssProps).forEach(([prop, cssVar]) => {
+          const value = el.style.getPropertyValue(cssVar).trim();
+          if (value) {
+            css += `    ${cssVar}: ${value};\n`;
+          }
+        });
+        css += `}\n`;
+      }
+    });
+    
+    const output = document.getElementById('exportOutput');
+    output.textContent = css;
+    document.getElementById('copyBtn').style.display = 'block';
+    document.getElementById('copyBtn').onclick = () => copyToClipboard(css);
+  });
+
+  // Экспорт JavaScript объекта
+  document.getElementById('exportJs').addEventListener('click', () => {
+    const settings = {};
+    
+    Object.keys(elementMap).forEach(elementName => {
+      const config = elementMap[elementName];
+      const selector = config.selector;
+      const el = document.querySelector(selector);
+      
+      if (el) {
+        settings[elementName] = {};
+        Object.entries(config.cssProps).forEach(([prop, cssVar]) => {
+          const value = el.style.getPropertyValue(cssVar).trim();
+          if (value) {
+            settings[elementName][prop] = value;
+          }
+        });
+      }
+    });
+    
+    const jsCode = `const settingsExport = ${JSON.stringify(settings, null, 2)};`;
+    
+    const output = document.getElementById('exportOutput');
+    output.textContent = jsCode;
+    document.getElementById('copyBtn').style.display = 'block';
+    document.getElementById('copyBtn').onclick = () => copyToClipboard(jsCode);
+  });
+
+  // Копирование в буфер обмена
+  function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('copyBtn');
+      const originalText = btn.textContent;
+      btn.textContent = '✓ Скопировано!';
+      setTimeout(() => {
+        btn.textContent = originalText;
+      }, 2000);
+    });
+  }
 
   // Отрисовка
   document.fonts.ready.then(() => {
