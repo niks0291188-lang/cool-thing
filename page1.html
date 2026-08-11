@@ -1070,13 +1070,16 @@
     const el = document.querySelector(config.el);
 
     if (el) {
-      const root = key === 'phoneBody' ? document.documentElement : el;
-      root.style.setProperty(`${config.varPrefix}-x`, `${values.x}px`);
-      root.style.setProperty(`${config.varPrefix}-y`, `${values.y}px`);
-      root.style.setProperty(`${config.varPrefix}-width`, `${280 * values.scale}px`);
-      root.style.setProperty(`${config.varPrefix}-height`, `${520 * values.scale}px`);
-      root.style.setProperty(`${config.varPrefix}-w`, `${40 * values.scale}px`);
-      root.style.setProperty(`${config.varPrefix}-h`, `${40 * values.scale}px`);
+      el.style.setProperty(`${config.varPrefix}-x`, `${values.x}px`);
+      el.style.setProperty(`${config.varPrefix}-y`, `${values.y}px`);
+      
+      if (key === 'phoneBody') {
+        el.style.setProperty(`${config.varPrefix}-width`, `${280 * values.scale}px`);
+        el.style.setProperty(`${config.varPrefix}-height`, `${520 * values.scale}px`);
+      } else {
+        el.style.setProperty(`${config.varPrefix}-w`, `${40 * values.scale}px`);
+        el.style.setProperty(`${config.varPrefix}-h`, `${40 * values.scale}px`);
+      }
     }
   }
 
